@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+
+        <div class="header-logo">
+            <a href="homepage.html">
+                <img class="logo" src="img/logo.png" alt="Brand Logo"></a>
+        </div>
+
+        <div class="header-nav">
+            <a id="full" href="product-list.html?type=full">FULL SIZED</a>
+            <a id="tkl" href="product-list.html?type=tkl">TENKEYLESS</a>
+            <a id="75" href="product-list.html?type=75">75% LAYOUT</a>
+            <a id="65" href="product-list.html?type=65">65% LAYOUT</a>
+            <a id="60" href="product-list.html?type=60">60% LAYOUT</a>
+        </div>
+
+        <div class="header-icon">
+            <a href="registration.html">
+                <img class="icon" src="img/user.svg" alt=""></a>
+            <a href="">
+                <img class="icon" src="img/search.svg" alt=""></a>
+            <a href="cart.html">
+                <img class="icon" src="img/cart.svg" alt=""></a>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <h1 id="h1"></h1>
+        <hr>
+
+        <div id="myData" class="row">
+
+
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Copyright 2021 &copy; sydkif</p>
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+    fetch('product.json')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            appendData(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+    function appendData(data) {
+
+        let mainContainer = document.getElementById("myData");
+        let input_url = window.location.href;
+        let url = new URL(input_url);
+        let type = url.searchParams.get("type");
+        console.log(type);
+
+        let h1 = document.getElementById("h1");
+        if (type == "full")
+            h1.innerHTML = "Full-Sized Keyboard Collections";
+        if (type == "tkl")
+            h1.innerHTML = "Tenkeyless Keyboard Collections";
+        if (type == "75")
+            h1.innerHTML = "75% Keyboard Collections";
+        if (type == "65")
+            h1.innerHTML = "65% Keyboard Collections";
+        if (type == "60")
+            h1.innerHTML = "60% Keyboard Collections";
+
+        document.getElementById(type).className = "selected";
+
+
+        for (let i = 0; i < data.length; i++) {
+
+            if (data[i].type == type) {
+
+                let columnProduct = document.createElement("div");
+                columnProduct.className = "column product";
+
+                columnProduct.innerHTML =
+                    '<a href="product-detail.html?type=' +
+                    type + '&name=' + data[i].name + '">' +
+                    '<div class="card">' +
+                    '<img src="' + data[i].image + '" alt="">' +
+                    '<h3>' + data[i].name + '</h3>' +
+                    '<p>RM' + data[i].price + '.00</p>' +
+                    '</div>' +
+                    '</a>';
+
+                mainContainer.appendChild(columnProduct);
+
+            }
+        }
+    }
+</script>

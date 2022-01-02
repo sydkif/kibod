@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div class="header-logo">
+            <a href="homepage.html">
+                <img class="logo" src="img/logo.png" alt="Brand Logo"></a>
+        </div>
+
+        <div class="header-nav">
+            <a id="full" href="product-list.html?type=full">FULL SIZED</a>
+            <a id="tkl" href="product-list.html?type=tkl">TENKEYLESS</a>
+            <a id="75" href="product-list.html?type=75">75% LAYOUT</a>
+            <a id="65" href="product-list.html?type=65">65% LAYOUT</a>
+            <a id="60" href="product-list.html?type=60">60% LAYOUT</a>
+        </div>
+
+        <div class="header-icon">
+            <a href="registration.html">
+                <img class="icon" src="img/user.svg" alt=""></a>
+            <a href="">
+                <img class="icon" src="img/search.svg" alt=""></a>
+            <a href="cart.html">
+                <img class="icon" src="img/cart.svg" alt=""></a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="column">
+                <img id="productImage" src="" alt="">
+            </div>
+
+            <div class="column">
+                <form name="productForm" action="cart.html" onsubmit="addToCart()">
+                    <h1 id="productName"></h1>
+                    <hr>
+                    <h3>★★★★☆ 60 Ratings</h3>
+                    <h2 id="productPrice"></h2>
+                    <!-- half star &#11240;  ★	&#9733;☆	&#9734;-->
+                    <h5>QUANTITY</h5>
+                    <input type="number" pattern="[0-9]*" id="spinner" name="quantity" value="1" min="1" max="99"
+                        step="1" oninput="maxLengthCheck(this)" maxlength="2">
+                    <br>
+                    <input type="hidden" name="name" value="">
+                    <input type="hidden" name="price" value="">
+                    <!-- <input class="cart-btn" type="submit" value="Add to cart"> -->
+                    <button type="button" class="cart-btn" onclick="addToCart()"><span>Add to cart </span></button>
+                    <button type="submit" class="buy-btn"><span>Buy it now </span></button>
+                    <br>
+                    <!-- <input class="buy-btn" type="submit" value="Buy it now"> -->
+                </form>
+            </div>
+        </div>
+        <br><br>
+        <hr>
+        <h3>** BELOW THIS IS ONLY A TEMPLATE **</h3>
+        <h2>The K12 has included keycaps for both Windows and Mac operating systems.</h2>
+        <img src="img/products/60/desc-img.jpg" alt="">
+        <hr>
+        <div class="row">
+
+            <div class="column">
+                <h3>SPECIFICATION</h3>
+                <p>Number of Keys: 61 keys <br><br>
+                    Number of Multimedia Keys: 12 Frame Material: ABS / ABS+Aluminum bezels <br><br>
+                    Keycap Material: ABS <br><br>
+                    Keycap Profile: OEM <br><br>
+                    Layout: ANSI <br><br>
+                    Version: Gateron Mechanical / Optical / Keychron Mechanical / Hot-swappable <br><br>
+                    Switches: Gateron Mechanical / Keychron Optical / Keychron Mechanical <br><br>
+                    *Socket of Keychron Non-backlit (Hot-swappable) and Gateron (Hot-swappable) are compatible with
+                    almost
+                    all the MX style 3-pin and 5-pin mechanical switches on the market (including Gateron, Cherry,
+                    Kailh,
+                    etc.).</p>
+            </div>
+            <div class="column">
+                <h3>CONNECTIVITY AND POWER
+                </h3>
+                <p>
+                    Backlit Types: 18 (Exclude Non-Backlit version)<br><br>
+                    Backlit: Adjustable 4-level RGB backlit (Exclude Non-Backlit version)<br><br>
+                    System: Windows/Android/Mac/iOS<br><br>
+                    Battery: 4000mAh Rechargeable li-polymer battery<br><br>
+                    BT Working Time (Non-Backlit version): Up to 570 hours (Lab test result may lety by actual
+                    use)<br><br>
+                    BT Working Time (Backlit off): Up to 240 hours (Lab test result may lety by actual use)<br><br>
+                    BT Working Time (White backlit): Up to 68 hours (Lab test result may lety by actual use)<br><br>
+                    BT Working Time (RGB backlit): Up to 72 hours (Lab test result may lety by actual use)<br><br>
+                    Connection: Bluetooth and Type-C cable<br><br>
+                    Bluetooth version: 5.1<br><br>
+                    Bluetooth Device Name: Keychron K12<br><br>
+                </p>
+            </div>
+
+            <div class="column">
+                <h3>PHYSICAL UNIT</h3>
+                <p>Dimension (Plastic frame version): 293 x 102mm<br><br>
+                    Weight: About 536g / 1.18lbs<br><br>
+                    Dimension (Aluminum bezels version): 298 x 107mm<br><br>
+                    Height without keycap (front) 24mm<br><br>
+                    Height without keycap (rear) 30mm<br><br>
+                    Weight: About 664g / 1.46lbs<br><br>
+                    Operating Environment: -10 to 50℃<br><br>
+                </p>
+            </div>
+            <div class="column">
+                <h3>PACKAGE CONTENT
+                </h3>
+                <p>1 x Keyboard<br><br>
+                    1 x USB-C to USB Type-C Cable<br><br>
+                    1 x Keycap Puller<br><br>
+                    1 x User Manual<br><br>
+                </p>
+            </div>
+        </div>
+        <hr>
+        <h2>Customer Reviews</h2>
+
+        <div class="row">
+
+            <div class="column review">
+                <p>★★★★☆ 26/10/2021 by <b>Sam Elliot</b></p>
+                <p><b>Almost perfect</b><br>
+                    Love the form factor — it’s a great mix between space savings while still giving full functionality.
+                    The brown Gateron switches are ok but they’re fairly linear in feeling. Was hoping for a bit more
+                    tactility. Would be nice to have Bananas or Mints as an option at checkout. Oh well, that’s what the
+                    hotswap is for. Using the FN key to activate the arrows doesn’t bother me as much as I thought it
+                    would and I got used to it after about a week! The quality of the keycaps leaves something to be
+                    desired. My backspace has a knick in it and I wish that we could choose a different keycap color on
+                    checkout. Also wish we could change the speed of the lights, like we can with the K4 and K3; sad
+                    that’s not an option on the K12. I also wish the case was a bit shorter at the front but it’s not as
+                    bad as the original K4. Overall, it’s a nice 60% board, glad to have purchased it!</p>
+                <hr>
+            </div>
+
+            <div class="column review">
+                <p>★★★★☆ 08/10/2021 by <b>Kouhei Kobayashi</b></p>
+                <p><b>Nice. But Arrows…</b><br>
+                    It's a great keyboard and the RGB is very clean. The RGB is beautiful, but it's a little hard to use
+                    without the arrow keys. If you use it a lot for text input, you might want to get the K6. I had no
+                    problem with the function keys. I bought a hot-swappable model, so I'm going to replace the switches
+                    to make my favorite keyboard.</p>
+                <hr>
+            </div>
+
+            <div class="column review">
+                <p>★★★★★ 08/09/2021 by <b>apple</b></p>
+                <p><b>yes</b><br>
+                    just giving you a nice review
+                </p>
+                <hr>
+            </div>
+
+            <div class="column review">
+                <p>★★★★★ 21/08/2021 by <b>Michael Johnson</b></p>
+                <p><b>Fantastic Bang For the Buck and Quality</b><br>
+                    I ordered the model without backlight and hot swappable switches. I liked the keys that came with it
+                    and they were labeled well (not something to take for granted with a 60% with the additional fn
+                    keys). I also felt the keychron browns were nice as well. The beauty of being modular though was
+                    that I could (and did) switch out the switches and keycaps with no issue what so ever! Also the
+                    bluetooth latency is super low, but if you are gaming you can always plug in the cord if you want.
+                </p>
+                <hr>
+            </div>
+
+            <div class="column review">
+                <p>★★★★★ 08/06/2021 by <b>Boris Kakuta</b></p>
+                <p><b>Very good keyboard</b><br>
+                    Very fast shipping. With Apple macbook keyboard over bluetooth works excellent.
+                </p>
+                <hr>
+            </div>
+
+        </div>
+        <br>
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a class="active" href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">&raquo;</a>
+        </div>
+
+    </div>
+
+
+
+    <footer>
+        <p>Copyright 2021 &copy; sydkif</p>
+    </footer>
+</body>
+
+</html>
+
+<script>
+
+    fetch('product.json')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            appendData(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+    function appendData(data) {
+
+        let input_url = window.location.href;
+        let url = new URL(input_url);
+        let name = url.searchParams.get("name");
+
+        console.log(name);
+
+
+        for (let i = 0; i < data.length; i++) {
+
+            if (data[i].name == name) {
+
+                document.getElementById("productName").innerHTML = name + " Wireless Mechanical Keyboard";
+                document.getElementById("productPrice").innerHTML = "RM" + data[i].price + ".00";
+                document.getElementById("productImage").src = data[i].image;
+
+                document.forms["productForm"]["name"].value = data[i].name;
+                document.forms["productForm"]["price"].value = data[i].price;
+
+            }
+        }
+    }
+
+
+    function addToCart() {
+
+        // Parse any JSON previously stored in allProducts
+        let existingProducts = JSON.parse(localStorage.getItem("allProducts"));
+        if (existingProducts == null) existingProducts = [];
+        let _name = document.forms["productForm"]["name"].value;
+        let _price = document.forms["productForm"]["price"].value;
+        let _quantity = document.forms["productForm"]["quantity"].value;
+
+        let product = {
+            "name": _name,
+            "price": _price,
+            "quantity": _quantity
+        };
+        localStorage.setItem("product", JSON.stringify(product));
+        // Save allProducts back to local storage
+        existingProducts.push(product);
+        localStorage.setItem("allProducts", JSON.stringify(existingProducts));
+
+        alert("Product added successfully!");
+
+    }
+
+
+</script>

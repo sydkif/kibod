@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto");
+
+* {
+    font-family: "Roboto";
+    box-sizing : border-box
+}
+
+.logo {
+    height: 90px;
+
+}
+
+
+@media screen and (max-width: 530px) {
+    .logo {
+        height: 72px;
+    }
+}
+
+a.nav-link:hover,
+a.nav-link.active {
+
+    font-weight    : bold;
+
+}
+
+.full-row img {
+    height: 160px;
+}
+
+.compact-row img {
+    height: 148px;
+}
+
+.five-row img {
+    height: 128px;
+}
+
+.four-row img {
+    height: 110px;
+}
+
