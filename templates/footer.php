@@ -1,5 +1,5 @@
 <footer>
-  <p class="mt-3">Copyright 2022 &copy; KIBOD&trade;</p>
+  <p class="mt-3 fw-bold">Copyright 2022 &copy; KIBOD&trade;</p>
 </footer>
 
 </body>
