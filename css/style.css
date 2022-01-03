@@ -5,23 +5,46 @@
     box-sizing : border-box
 }
 
+body {
+    margin          : 0;
+    background-color: whitesmoke
+}
+
 .logo {
     height: 90px;
 
 }
 
-
-@media screen and (max-width: 530px) {
-    .logo {
-        height: 72px;
-    }
+nav.navbar {
+    top             : 0px;
+    position        : fixed;
+    width           : 100%;
+    height          : 100px;
+    background-color: white;
+    z-index         : 999;
 }
+
+.container-fluid {
+    background-color: white;
+}
+
+.carousel {
+    margin-top: 100px;
+}
+
+
 
 a.nav-link:hover,
 a.nav-link.active {
 
-    font-weight    : bold;
+    font-weight: bold;
 
+}
+
+.card-body-custom {
+    height     : 180px;
+    margin-top : 20px;
+    margin-left: 20px;
 }
 
 .full-row img {
@@ -40,3 +63,113 @@ a.nav-link.active {
     height: 110px;
 }
 
+
+.product img {
+    object-fit     : cover;
+    /* Do not scale the image */
+    object-position: 0px 30%;
+    /* Center the image within the element */
+    width          : 100%;
+    max-height     : 200px;
+}
+
+@media screen and (min-width: 1120px) {
+
+    .carousel-inner {
+        width : 100%;
+        height: 600px !important;
+    }
+
+
+}
+
+@media screen and (max-width: 768px) {
+    .logo {
+        height: 60px;
+    }
+
+    span.navbar-toggler-icon {
+        font-size: smaller;
+    }
+
+    nav.navbar {
+        height: 80px;
+    }
+
+    .carousel {
+        margin-top: 80px;
+    }
+
+    .card-body-custom {
+        height: 160px;
+    }
+
+    .full-row img {
+        height: 140px;
+    }
+
+    .compact-row img {
+        height: 128px;
+    }
+
+    .five-row img {
+        height: 108px;
+    }
+
+    .four-row img {
+        height: 90px;
+    }
+
+    .product img {
+        max-height: 350px;
+    }
+
+}
+
+@media screen and (max-width: 540px) {
+
+    .card-body-custom {
+        height: 120px;
+    }
+
+    .full-row img {
+        height: 100px;
+    }
+
+    .compact-row img {
+        height: 88px;
+    }
+
+    .five-row img {
+        height: 78px;
+    }
+
+    .four-row img {
+        height: 50px;
+    }
+
+    .product img {
+        max-height: 275px;
+    }
+
+}
+
+
+
+
+
+
+
+
+footer {
+    box-shadow      : 0 3px 10px rgb(0 0 0 / 0.5);
+    display         : flex;
+    flex-direction  : column;
+    position        : absolute;
+    margin-top      : 60px;
+    width           : 100%;
+    background-color: black;
+    color           : white;
+    text-align      : center;
+    padding         : 25px 0 25px 0;
+}

@@ -47,59 +47,36 @@
 
     <div class="row">
 
-        <div class="col-12 col-lg-6 my-3">
-            <a class="text-decoration-none text-muted" href="product-list.html?type=full">
-                <div class="card full-row" style="height: 250px;">
-                    <div class="card-header mb-3"><b>FULL SIZED</b></div>
-                    <img src="img/svg/full-sized.svg" alt="full-sized-keyboard"><br>
-                </div>
+        <?php
 
-            </a>
-        </div>
+        $category = array(
+            array('FULL SIZED', 'full', 'full-sized.svg', 'Most likely same layout you currently have.'),
+            array('TENKEYLESS', 'tkl', 'tenkeyless.svg', 'All your keys you need minus a number pad.'),
+            array('75% LAYOUT', '75', '75-layout.svg', 'Most compact space possible. Arrows included.'),
+            array('65% LAYOUT', '65', '65-layout.svg', 'Missing function keys but arrow keys are here.'),
+            array('60% LAYOUT', '60', '60-layout.svg', 'Need to use layers in order to use missing keys.')
+        );
 
-        <div class="col-12 col-lg-6 my-3">
-            <a class="text-decoration-none text-muted" href="product-list.html?type=tkl">
-                <div class="card full-row" style="height: 250px;">
-                    <div class="card-header mb-3"><b>TENKEYLESS</b></div>
-                    <img src="img/svg/tenkeyless.svg" alt="tenkeyless-keyboard"><br>
-                </div>
+        foreach ($category as $x) { ?>
 
-            </a>
-        </div>
 
-        <div class="col-12 col-lg-6 my-3">
-            <a class="text-decoration-none text-muted" href="product-list.html?type=75">
-                <div class="card compact-row" style="height: 250px;">
-                    <div class="card-header mb-3"><b>75% LAYOUT</b></div>
-                    <img src="img/svg/75-layout.svg" alt="75-layout-keyboard"><br>
-                </div>
+            <div class="col-12 col-xl-6 my-3">
+                <a class="text-decoration-none text-muted" href="product-list.php?type=<?= $x[1] ?>">
+                    <div class="card full-row shadow">
+                        <div class="card-header fw-bold"><?= $x[0] ?></div>
+                        <div class="card-body-custom">
+                            <img src="img/svg/<?= $x[2] ?>" alt="full-sized-keyboard">
+                        </div>
+                        <div class="card-footer">
+                            <span><?= $x[3] ?></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-            </a>
-        </div>
-
-        <div class="col-12 col-lg-6 my-3">
-            <a class="text-decoration-none text-muted" href="product-list.html?type=65">
-                <div class="card five-row" style="height: 250px;">
-                    <div class="card-header mb-3 align-items-end"><b>65% LAYOUT</b></div>
-                    <img src="img/svg/65-layout.svg" alt="65-layout-keyboard"><br>
-                </div>
-
-            </a>
-        </div>
-
-        <div class="col-12 col-lg-6 my-3">
-            <a class="text-decoration-none text-muted" href="product-list.html?type=60">
-                <div class="card five-row" style="height: 250px;">
-                    <div class="card-header mb-3"><b>60% LAYOUT</b></div>
-                    <img src="img/svg/60-layout.svg" alt="60-layout-keyboard"><br>
-                </div>
-            </a>
-        </div>
+        <?php  } ?>
 
     </div>
-
-
-
 
 </div>
 

@@ -17,7 +17,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container-fluid">
-            <img class="logo" src="img/logo.png" alt="" srcset="">
+            <a href="index.php"><img class="logo" src="img/logo.png" alt="" srcset=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,34 +25,35 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <hr>
                     <li class="nav-item mx-1">
-                        <a class="nav-link active" href="#">HOME</a>
+                        <a class="nav-link active" href="index.php">HOME</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="#">FULL SIZED</a>
+                        <a class="nav-link" href="product-list.php?type=full">FULL SIZED</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="#">TENKEYLESS</a>
+                        <a class="nav-link" href="product-list.php?type=tkl">TENKEYLESS</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="#">75% LAYOUT</a>
+                        <a class="nav-link" href="product-list.php?type=75">75% LAYOUT</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="#">65% LAYOUT</a>
+                        <a class="nav-link" href="product-list.php?type=65">65% LAYOUT</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="#">60% LAYOUT</a>
+                        <a class="nav-link" href="product-list.php?type=60">60% LAYOUT</a>
                     </li>
                     <hr>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+
                 </form>
+                <a class="nav-link text-decoration-none text-muted" href="register.php">SIGN UP</a>
+                <a class="nav-link text-decoration-none text-muted" href="login.php">LOG IN</a>
                 <br>
             </div>
         </div>
