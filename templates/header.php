@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>KIBOD</title>
+    <title>KIBOD&trade;</title>
 </head>
 
 <body>
@@ -49,11 +50,16 @@
                     </li>
                     <hr>
                 </ul>
-                <form class="d-flex">
 
-                </form>
-                <a class="nav-link text-decoration-none text-muted" href="register.php">SIGN UP</a>
-                <a class="nav-link text-decoration-none text-muted" href="login.php">LOG IN</a>
+                <?php
+                if (isset($_SESSION['username'])) {
+                    echo '<a class="nav-link text-decoration-none text-dark" href="logout.php">LOGOUT</a>';
+                } else {
+                    echo '<a class="nav-link text-decoration-none text-dark" href="register.php">SIGN UP</a>';
+                    echo '<a class="nav-link text-decoration-none text-dark" href="login.php">LOGIN</a>';
+                }
+                ?>
+
                 <br>
             </div>
         </div>

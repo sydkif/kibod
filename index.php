@@ -59,11 +59,10 @@
 
         foreach ($category as $x) { ?>
 
-
             <div class="col-12 col-xl-6 my-3">
-                <a class="text-decoration-none text-muted" href="product-list.php?type=<?= $x[1] ?>">
-                    <div class="card full-row shadow">
-                        <div class="card-header fw-bold"><?= $x[0] ?></div>
+                <a class="text-decoration-none text-dark" href="product-list.php?type=<?= $x[1] ?>">
+                    <div class="card full-row shadow category">
+                        <div class="card-header fw-bold fs-5"><?= $x[0] ?></div>
                         <div class="card-body-custom">
                             <img src="img/svg/<?= $x[2] ?>" alt="full-sized-keyboard">
                         </div>
