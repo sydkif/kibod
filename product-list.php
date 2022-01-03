@@ -1,4 +1,6 @@
-<?php include('templates/header.php');
+<?php 
+
+include('templates/header.php');
 require_once('model/product.php');
 
 if (isset($_GET['type'])) {
@@ -45,7 +47,7 @@ if (isset($_GET['type'])) {
         ?>
 
                 <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mt-4 mb-3">
-                    <a href="product-detail.php" class="text-decoration-none text-dark">
+                    <a href="product-detail.php?id=<?= $p['id'] ?>" class="text-decoration-none text-dark">
                         <div class="card product shadow-sm">
                             <img src="<?= $p['image'] ?>" class="card-img-top" alt="...">
                             <div class="card-body">

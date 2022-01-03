@@ -14,7 +14,7 @@ class product
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT type, name, image, price FROM product";
+        $sql = "SELECT id, type, name, image, price FROM product";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -23,12 +23,27 @@ class product
             foreach ($result as $product) {
                 $product_list[] = $product;
             }
-
+            $conn->close();
             return $product_list;
         } else {
 
             $conn->close();
             return "0 results";
         }
+    }
+
+    function getProductById($id)
+    {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM product WHERE id = '" . $id . "'";
+        $result = $conn->query($sql)->fetch_array();
+
+        $conn->close();
+        return $result;
     }
 }
