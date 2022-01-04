@@ -1,6 +1,6 @@
 <?php
 
-require_once('config.php');
+require_once('../config.php');
 
 class product
 {
@@ -45,5 +45,20 @@ class product
 
         $conn->close();
         return $result;
+    }
+
+    function countProduct() {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT COUNT(id) FROM product";
+        $result = $conn->query($sql);
+        $row = $result->fetch_array();
+
+        $conn->close();
+        return $row;
     }
 }

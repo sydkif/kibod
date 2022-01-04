@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+
+        body {
+            font-family     : 'Roboto', sans-serif !important;
+            /* background-image: url('img/bg.jpg'); */
+            background-size : cover;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        :root{
+            --offcanvas-width: 250px;
+            --topNavbarHeight: 56px;
+        }
+
+        .sidebar-nav{
+            width: var(--offcanvas-width);
+        }
+
+        @media (min-width: 992px) {
+            body {
+                overflow: auto !important;
+            }
+            
+            .offcanvas-backdrop::before {
+                display: none;
+            }
+
+            main {
+                margin-left: var(--offcanvas-width);
+            }
+            .sidebar-nav {
+                transform: none;
+                visibility: visible !important;
+                top: var(--topNavbarHeight);
+                height: calc(100% - var(--topNavbarHeight));
+            }
+        }
