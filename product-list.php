@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include('templates/header.php');
 require_once('model/product.php');
@@ -46,26 +46,36 @@ if (isset($_GET['type'])) {
 
         ?>
 
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mt-4 mb-3">
-                    <a href="product-detail.php?id=<?= $p['id'] ?>" class="text-decoration-none text-dark">
-                        <div class="card product shadow-sm">
-                            <img src="<?= $p['image'] ?>" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-title" style="font-size: 14px;"><?= $p['name'] ?></p>
-                                <p class="card-text fw-bold">RM <?= $p['price'] ?></p>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a href="#" class="btn btn-outline-dark btn-sm fw-bold w-100">Add to Cart</a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="#" class="btn btn-dark btn-sm fw-bold w-100">Buy Now</a>
+                <div class="col-6 col-md-6 col-lg-4 col-xxl-3 mt-4 mb-3">
+                    <form action="test.php" method="POST">
+                        <a href="product-detail.php?id=<?= $p['id'] ?>" class="text-decoration-none text-dark">
+                            <div class="card product shadow-sm">
+                                <img src="<?= $p['image'] ?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <p class="card-title product-name"><?= $p['name'] ?></p>
+                                    <p class="card-text fw-bold">RM <?= $p['price'] ?></p>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <button type="" class="btn btn-outline-dark btn-sm fw-bold w-100">Add to Cart</button>
+
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <button type="submit" class="btn btn-dark btn-sm fw-bold w-100">Buy Now</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+
+                        <input type="hidden" name="image" value="<?= $p['image'] ?>">
+                        <input type="hidden" name="name" value="<?= $p['name'] ?>">
+                        <input type="hidden" name="price" value="<?= $p['price'] ?>">
+                        <input type="hidden" name="id" value="<?= $p['id'] ?>">
+
+                    </form>
                 </div>
+
 
         <?php
             }

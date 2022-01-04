@@ -39,7 +39,7 @@
 
 <div class="container mt-3">
 
-    <span class="fs-4"><b>Choose you style.</b></span><br>
+    <span class="fs-4"><b>Choose your style.</b></span><br>
     <span class="fs-5">Need help choosing one?</span>
     <a class="btn btn-sm btn-dark mx-2" href="https://i.imgur.com/uW8OuLu.png"><b>Click here</b></a>
     </h3>
@@ -81,3 +81,19 @@
 
 
 <?php include('templates/footer.php'); ?>
+
+
+<!-- PWA -->
+<!-- <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+</script> -->

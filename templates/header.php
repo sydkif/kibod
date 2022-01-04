@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+//initialize cart if not set or is unset
+// if (!isset($_SESSION['cart'])) {
+//     $_SESSION['cart'] = array();
+// }
+
+// //unset quantity
+// unset($_SESSION['qty_array']);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="manifest" href="manifest.json"> -->
 
     <title>KIBOD&trade;</title>
 </head>
@@ -26,39 +40,40 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <hr>
                     <li class="nav-item mx-1">
-                        <a class="nav-link active" href="index.php">HOME</a>
+                        <a class="nav-link 
+                        <?php if (basename($_SERVER['PHP_SELF']) == 'index.php') echo "active" ?>" href="index.php">HOME</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="product-list.php?type=full">FULL SIZED</a>
+                        <a class="nav-link 
+                        <?php if ($_GET['type'] == 'full') echo "active" ?>" href="product-list.php?type=full">FULL SIZED</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="product-list.php?type=tkl">TENKEYLESS</a>
+                        <a class="nav-link 
+                        <?php if ($_GET['type'] == 'tkl') echo "active" ?>" href="product-list.php?type=tkl">TENKEYLESS</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="product-list.php?type=75">75% LAYOUT</a>
+                        <a class="nav-link 
+                        <?php if ($_GET['type'] == 75) echo "active" ?>" href="product-list.php?type=75">75% LAYOUT</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="product-list.php?type=65">65% LAYOUT</a>
+                        <a class="nav-link 
+                        <?php if ($_GET['type'] == 65) echo "active" ?>" href="product-list.php?type=65">65% LAYOUT</a>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link" href="product-list.php?type=60">60% LAYOUT</a>
+                        <a class="nav-link 
+                        <?php if ($_GET['type'] == 60) echo "active" ?>" href="product-list.php?type=60">60% LAYOUT</a>
                     </li>
                     <hr>
                 </ul>
 
-                <?php
-                if (isset($_SESSION['username'])) {
-                    echo '<a class="nav-link text-decoration-none text-dark" href="logout.php">LOGOUT</a>';
-                } else {
-                    echo '<a class="nav-link text-decoration-none text-dark" href="register.php">SIGN UP</a>';
-                    echo '<a class="nav-link text-decoration-none text-dark" href="login.php">LOGIN</a>';
-                }
-                ?>
+                <a class="nav-link text-decoration-none text-dark <?php if (basename($_SERVER['PHP_SELF']) == 'cart.php') echo "active" ?>" href="cart.php">CART</a>
+                <a class="nav-link text-decoration-none text-dark <?php if (basename($_SERVER['PHP_SELF']) == 'login.php') echo "active" ?>" href="login.php">LOGIN</a>
+                <a class="nav-link text-decoration-none text-dark" href="logout.php" hidden>PROFILE</a>
 
                 <br>
             </div>
