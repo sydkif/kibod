@@ -56,7 +56,7 @@ $countProduct = $product->countProduct();
                     <li class="my-2">
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a href="logout.php" class="nav-link px-3">
+                    <li><a href="../logout.php" class="nav-link px-3">
                             <span class="me-3">
                                 <i class="bi bi-box-arrow-left"></i>
                             </span>

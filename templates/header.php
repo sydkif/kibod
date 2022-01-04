@@ -72,9 +72,13 @@ session_start();
                 </ul>
 
                 <a class="nav-link text-decoration-none text-dark <?php if (basename($_SERVER['PHP_SELF']) == 'cart.php') echo "active" ?>" href="cart.php">CART</a>
-                <a class="nav-link text-decoration-none text-dark <?php if (basename($_SERVER['PHP_SELF']) == 'login.php') echo "active" ?>" href="login.php">LOGIN</a>
-                <a class="nav-link text-decoration-none text-dark" href="logout.php" hidden>PROFILE</a>
-
+                <?php 
+                    if(isset($_SESSION['username'])) {
+                        echo '<a class="nav-link text-decoration-none text-dark" href="logout.php">PROFILE</a>';
+                    } else {
+                        echo '<a class="nav-link text-decoration-none text-dark" href="login.php">LOGIN</a>';
+                    }
+                ?>
                 <br>
             </div>
         </div>
