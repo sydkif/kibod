@@ -1,4 +1,16 @@
 <?php include('templates/header.php'); ?>
+<?php 
+
+require_once('model/user.php');
+
+if(isset($_POST['login'])) {    
+    $userid = $_POST['username'];
+    $password = $_POST['password'];
+    $user = new User();
+    $user->login($userid, $password);
+    
+} 
+?>
 
 <div class="container" style="margin-top: 150px;">
 
@@ -10,7 +22,7 @@
 
                 <div class="card-body px-4">
 
-                    <form action="controllers/Login.php" method="post">
+                    <form method="post" name="login">
 
                         <div class="mb-md-3 mt-md-3">
 
@@ -26,7 +38,7 @@
                             <label for="password" class="small-label"><b>PASSWORD</b></label>
                             <input class="bg-light mb-5 py-2 form-control" type="password" name="password" placeholder="Password" required>
 
-                            <button type="submit" class="btn btn-secondary py-2 w-100 shadow mb-5" style="border-radius: 0.5rem;">
+                            <button type="submit" class="btn btn-secondary py-2 w-100 shadow mb-5" style="border-radius: 0.5rem;" name="login">
                                 Log In</button>
 
                             <div class="text-center">
