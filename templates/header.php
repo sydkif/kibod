@@ -74,7 +74,7 @@ session_start();
                 <a class="nav-link text-decoration-none text-dark <?php if (basename($_SERVER['PHP_SELF']) == 'cart.php') echo "active" ?>" href="cart.php">CART</a>
                 <?php 
                     if(isset($_SESSION['username'])) {
-                        echo '<a class="nav-link text-decoration-none text-dark" href="logout.php">LOGOUT</a>';
+                        echo '<a class="nav-link text-decoration-none text-dark" href="profile.php">PROFILE</a>';
                     } else {
                         echo '<a class="nav-link text-decoration-none text-dark" href="login.php">LOGIN</a>';
                     }
