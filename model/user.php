@@ -62,6 +62,21 @@ class User {
         $conn->close();
     }
 
+    function countUser() {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT COUNT(username) FROM user";
+        $result = $conn->query($sql);
+        $row = $result->fetch_array();
+
+        $conn->close();
+        return $row;
+    }
+
     function getUserById($username){
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 

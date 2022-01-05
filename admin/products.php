@@ -106,7 +106,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="delete.php?id=<?= $row['id'] ?>&type=product&role=0">
+                                            <a href="delete.php?id=<?= $row['id'] ?>">
                                                 <button class="btn">
                                                     <i class="bi bi-trash" style="color: red;"></i>
                                                 </button>
@@ -123,7 +123,7 @@
             </div>
             <div class="row">
                 <div class="d-flex flex-row-reverse">
-                    <a href="add_product.php">
+                    <a href="product_detail.php">
                         <button type="button" class="btn btn-primary">
                             <i class="bi bi-plus-lg"></i> New Product
                         </button>

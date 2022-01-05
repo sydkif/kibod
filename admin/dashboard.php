@@ -4,6 +4,10 @@ require_once("../model/product.php");
 $product = new product();
 $countProduct = $product->countProduct();
 
+require_once("../model/user.php");
+$user = new User();
+$countUser = $user->countUser();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,7 +104,7 @@ $countProduct = $product->countProduct();
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                         Number of Users </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= 0 ?></div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $countUser[0]; ?></div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="bi bi-cash" style="font-size: 2rem; color: green;"></i>
@@ -132,7 +136,7 @@ $countProduct = $product->countProduct();
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                         No. Registered Users</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= 0 ?></div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $countUser[0]; ?></div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="bi bi-person-workspace" style="font-size: 2rem; color: teal;"></i>
@@ -143,23 +147,41 @@ $countProduct = $product->countProduct();
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
-                            Number of Product Sold by Month
+                            Pretend important chart exists here
                         </div>
                         <div class="card-body">
                             <canvas id="salesChart" class="chart" width="400" height="200"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">
-                            Product Sales by Location
+                            Our Top Choices
                         </div>
-                        <div class="card-body">
-                            <canvas id="salesChart2" class="chart" height="300"></canvas>
+                        <div class="card-body">                        
+                            <table class="table table-borderless">
+                            <?php 
+                                require_once("../model/product.php");
+                                $product = new product();
+                                $result = $product->getThreeProduct();
+                                $num=0;
+                                foreach($result as $row) {                                
+                            ?>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row"><?= $num+1; ?></td>
+                                        <td><?= $row['name']; ?></td>
+                                    </tr>
+                                </tbody>
+                            <?php 
+                            $num++;    
+                        }
+                            ?>
+                            </table>
                         </div>
                     </div>
                 </div>
