@@ -21,15 +21,7 @@
                             </div>
 
                             <div class="row mb-4 mt-5">
-                                <div class="col-12 col-md-6">
-                                    <label for="fname" class="small-label"><b>FIRST NAME</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="fname" placeholder="First name" required>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <label for="lname" class="small-label"><b>LAST NAME</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="lname" placeholder="Last name" required>
-                                </div>
-
+                                <hr>
                                 <div class="col-12 col-md-6">
                                     <label for="username" class="small-label"><b>USERNAME</b></label>
                                     <input class="bg-light mb-3 py-2 form-control" type="text" name="username" placeholder="Username" required>
@@ -38,7 +30,6 @@
                                     <label for="email" class="small-label"><b>EMAIL</b></label>
                                     <input class="bg-light mb-3 py-2 form-control" type="email" name="email" placeholder="Email address" required>
                                 </div>
-
                                 <div class="col-12 col-md-6">
                                     <label for="password" class="small-label"><b>PASSWORD</b></label>
                                     <input class="bg-light mb-3 py-2 form-control" type="password" name="password" placeholder="Password" required>
@@ -46,6 +37,24 @@
                                 <div class="col-12 col-md-6">
                                     <label for="confirm_password" class="small-label"><b>CONFIRM PASSWORD</b></label>
                                     <input class="bg-light mb-3 py-2 form-control" type="password" name="confirm_password" placeholder="Confirm password" required>
+                                </div>
+                                <hr>
+                                <div class="col-12 col-md-6">
+                                    <label for="fname" class="small-label"><b>FIRST NAME</b></label>
+                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="fname" placeholder="First name" required>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="lname" class="small-label"><b>LAST NAME</b></label>
+                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="lname" placeholder="Last name" required>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label for="phone" class="small-label"><b>PHONE NUMBER</b></label>
+                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="phone" placeholder="Phone number" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="address" class="small-label"><b>ADDRESS</b></label>
+                                    <!-- <input class="bg-light mb-3 py-2 form-control" type="text" name="address" placeholder="Address" required> -->
+                                    <textarea class="bg-light mb-3 py-2 form-control" name="address" id="" rows="3"></textarea>
                                 </div>
 
                             </div>

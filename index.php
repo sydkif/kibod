@@ -41,7 +41,7 @@
 
     <span class="fs-4"><b>Choose your style.</b></span><br>
     <span class="fs-5">Need help choosing one?</span>
-    <a class="btn btn-sm btn-dark mx-2" href="https://i.imgur.com/uW8OuLu.png"><b>Click here</b></a>
+    <a class="btn btn-sm btn-dark mx-2" href="https://i.imgur.com/uW8OuLu.png" target="_blank" rel="noopener noreferrer"><b>Click here</b></a>
     </h3>
     <hr>
 

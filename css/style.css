@@ -178,12 +178,15 @@ a.nav-link.active {
     }
 
     .cart-img {
-        width: 60px;
+        width: 40px;
     }
 
-    .table {
+    .table,
+    .cart {
         font-size: 12px;
     }
+
+
 
     body {
         font-size: 12px;

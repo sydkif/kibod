@@ -43,7 +43,7 @@ $total_price = 0;
                     <span class="fs-6 fw-bold">DELIVERY ADDRESS</span>
                 </div>
                 <div class="card-body">
-                    <p><b>Syed Akif (013-9356443)</b> 4733, Jalan Cengkih, Kg. Jabur Kubur 24000 Kemaman, Terengganu.</p>
+                    <p><b>Lorem ipsum (01X-XXXXXXX)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
             </div>
 
@@ -85,6 +85,14 @@ $total_price = 0;
                             }
                             ?>
 
+                            <tr>
+                                <th class="text-end border-dark" colspan="2">Subtotal:</th>
+                                <td class="text-center border-dark"><?= $total_price ?>.00</td>
+                                <td class="text-center border-dark"><?= $total_qty ?></td>
+                                <td class="border-dark"></td>
+
+                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -107,8 +115,8 @@ $total_price = 0;
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
                         <label class="btn btn-outline-dark product-name" for="btnradio3">Online Banking</label>
 
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                        <label class="btn btn-outline-dark product-name" for="btnradio3">Credit / Debit Card</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+                        <label class="btn btn-outline-dark product-name" for="btnradio4">Credit / Debit Card</label>
                     </div>
                     <hr>
 

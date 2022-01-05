@@ -42,57 +42,51 @@ $total_price = 0;
 
             <hr>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" colspan="2">ITEM</th>
-                        <th class="text-center" scope="col">PRICE</th>
-                        <th class="text-center" scope="col">QUANTITY</th>
-                        <th class="text-center" scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="card">
+                <div class="card-body">
 
-                    <?php foreach ($cart_items as $item) { ?>
 
-                        <tr>
-                            <th class="align-middle" scope="row"><?= $x++ ?></th>
-                            <td class="align-middle" style="width: 1px;"> <img class="cart-img" src="<?= $item['image'] ?>" alt=""></td>
-                            <td class="align-middle text-left">
-                                <?= $item['name'] ?>
-                            </td>
-                            <td class="align-middle text-center"><?= $item['price'] ?>.00</td>
-                            <td class="align-middle text-center">
-                                <input type="number" name="quantity" id="" value="<?= $item['quantity'] ?>" style="width:36px;">
-                            </td>
-                            <td class="align-middle text-center">
-                                <button class="btn btn-danger btn-sm fw-bold"><i class="bi bi-trash"></i></button>
-                            </td>
-                        </tr>
 
-                    <?php
+                    <table class="table">
+                        <thead>
+                            <tr>
 
-                        $total_qty += $item['quantity'];
-                        $total_price += ($item['price'] * $item['quantity']);
-                    }
-                    ?>
-           
+                                <th scope="col" colspan="2">ITEM</th>
+                                <th class="text-center" scope="col">PRICE</th>
+                                <th class="text-center" scope="col">QUANTITY</th>
+                                <th class="text-center" scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    <tr>
-                        <th class="text-end border-dark" colspan="3">TOTAL:</th>
-                        <td class="text-center border-dark"><?= $total_price ?>.00</td>
-                        <td class="text-center border-dark"><?= $total_qty ?></td>
-                        <td class="border-dark"></td>
+                            <?php foreach ($cart_items as $item) { ?>
 
-                    </tr>
+                                <tr>
 
-                </tbody>
-            </table>
+                                    <td class="align-middle" style="width: 1px;"> <img class="cart-img" src="<?= $item['image'] ?>" alt=""></td>
+                                    <td class="align-middle text-left">
+                                        <?= $item['name'] ?>
+                                    </td>
+                                    <td class="align-middle text-center"><?= $item['price'] ?>.00</td>
+                                    <td class="align-middle text-center">
+                                        <input type="number" name="quantity" id="" value="<?= $item['quantity'] ?>" style="width:36px;">
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <button class="btn btn-danger btn-sm cart"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                
+                            <?php } ?>
 
-            <div class="row d-flex">
-                <div class="col text-end">
-                    <a href="checkout.php" class="btn btn-dark fw-bold">CHECKOUT</a>
+                        </tbody>
+                    </table>
+
+                    <div class="row d-flex">
+                        <div class="col text-end">
+                            <a href="checkout.php" class="btn btn-dark fw-bold ">CHECKOUT</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
