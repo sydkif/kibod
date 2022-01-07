@@ -2,6 +2,7 @@
 
 include('templates/header.php');
 require_once('model/product.php');
+require_once('model/cart.php');
 
 if (isset($_GET['type'])) {
     if ($_GET['type'] == 'full')
@@ -18,6 +19,50 @@ if (isset($_GET['type'])) {
         Header('Location: index.php');
 } else {
     Header('Location: index.php');
+}
+
+if (isset($_POST['addToCart'])) {
+
+    if (isset($_SESSION['username'])) {
+
+        $userCart = new Cart();
+        $productJson = $userCart->getUserCart($_SESSION['username']);
+        $product = json_decode($productJson, true);
+        $existed = $userCart->productExisted($_SESSION['username'], $_POST['id']);
+        
+        $array = array(
+            'qty' => $_POST['qty'],
+            'name' => $_POST['name'],
+            'image' => $_POST['image'],
+            'price' => $_POST['price']
+        );
+
+        $cart_data[$_POST['id']] = $array;
+
+        $final_data = json_encode($cart_data);
+
+        if ($existed)
+            echo '<script>alert("Product already added!")</script>';
+        else
+            $userCart->addToCart($_SESSION['username'], $final_data);
+    } else {
+        Header('Location: login.php');
+    }
+}
+
+if (isset($_POST['buyNow'])) {
+    if (isset($_SESSION['username'])) {
+
+        echo '<br>';
+        echo '<br>';
+        echo '<br>';
+        echo '<br>';
+        echo 'asd';
+
+        Header('Location: cart.php');
+    } else {
+        Header('Location: login.php');
+    }
 }
 
 ?>
@@ -37,7 +82,7 @@ if (isset($_GET['type'])) {
 
         <?php
 
-        $product = new product();
+        $product = new Product();
         $productList = $product->getProductList();
 
         foreach ($productList as $p) {
@@ -47,7 +92,7 @@ if (isset($_GET['type'])) {
         ?>
 
                 <div class="col-6 col-md-6 col-lg-4 col-xxl-3 mt-4 mb-3">
-                    <form action="cart.php" method="POST">
+                    <form action="" method="POST">
                         <div class="card product shadow-sm">
                             <a href="product-detail.php?id=<?= $p['id'] ?>" class="text-decoration-none text-dark">
                                 <img src="<?= $p['image'] ?>" class="card-img-top" alt="...">
@@ -55,34 +100,38 @@ if (isset($_GET['type'])) {
                                     <p class="card-title product-name"><?= $p['name'] ?></p>
                                     <p class="card-text fw-bold">RM <?= $p['price'] ?></p>
                                     <hr>
-                            </a>
-                            <div class="row">
-                                <div class="col-12 col-md-6">
-                                    <button type="button" class="btn btn-outline-dark btn-sm fw-bold w-100" onclick="alert('test')">Add to Cart</button>
+
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <button type="submit" name="addToCart" class="btn btn-outline-dark btn-sm fw-bold w-100">Add to Cart</button>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <button type="submit" name="buyNow" class="btn btn-dark btn-sm fw-bold w-100">Buy Now</button>
+                                        </div>
+                                    </div>
 
                                 </div>
-                                <div class="col-12 col-md-6">
-                                    <button type="submit" class="btn btn-dark btn-sm fw-bold w-100">Buy Now</button>
-                                </div>
-                            </div>
+                            </a>
                         </div>
+
+                        <input type="hidden" name="id" value="<?= $p['id'] ?>">
+                        <input type="hidden" name="name" value="<?= $p['name'] ?>">
+                        <input type="hidden" name="image" value="<?= $p['image'] ?>">
+                        <input type="hidden" name="price" value="<?= $p['price'] ?>">
+                        <input type="hidden" name="qty" value="1">
+
+                    </form>
                 </div>
 
 
-                <input type="hidden" name="image" value="<?= $p['image'] ?>">
-                <input type="hidden" name="name" value="<?= $p['name'] ?>">
-                <input type="hidden" name="price" value="<?= $p['price'] ?>">
-                <input type="hidden" name="id" value="<?= $p['id'] ?>">
+        <?php
 
-                </form>
-    </div>
-
-
-<?php
             }
-        } ?>
+        }
 
-</div>
+        ?>
+
+    </div>
 </div>
 
 

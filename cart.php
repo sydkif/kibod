@@ -1,34 +1,41 @@
 <?php
 
 include('templates/header.php');
+include('model/cart.php');
 
+if (!isset($_SESSION['username']))
+    Header('Location: login.php');
 
-// $cart_items = array(
-//     array('FULL SIZED', 'full', 'full-sized.svg', 'Most likely same layout you currently have.')
-// );
+$userCart = new Cart();
+$productJson = $userCart->getUserCart($_SESSION['username']);
 
-$cart_items = array(
-    array(
-        "image" => "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/keychron-k10--full-size-wired-wireless-mechanical-keyboard-white-rgb-backlight-gateron-blue-switches-mac-windows-layout_1800x1800.jpg?v=1631097816",
-        "name" => "K10 RGB Backlit Blue Switch",
-        "price" => "84",
-        "quantity" => "2"
-    ), array(
-        "image" => "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-K2-wireless-mechanical-keyboard-for-Mac-Windows-iOS-Gateron-switch-red-with-type-C-RGB-white-backlight_9cb9d3e6-a5ac-4ac5-becb-079c7103ed2f_1800x1800.jpg?v=1621223999",
-        "name" => "K2 RGB Backlit Red Switch",
-        "price" => "69",
-        "quantity" => "3"
-    ), array(
-        "image" => "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-K12-60percent-compact-wireless-mechanical-keyboard-Non-backlit-version-for-Mac-Windows-Keychron-mechanical-switch-brown_1800x1800.jpg?v=1618315916",
-        "name" => "K12 Non Backlit Brown Switch",
-        "price" => "59",
-        "quantity" => "1"
-    )
-);
+$product = json_decode($productJson, true);
 
-$x = 1;
-$total_qty = 0;
-$total_price = 0;
+if (isset($_POST['checkout'])) {
+
+    $x = 0;
+    foreach ($product as $product_id) {
+        foreach ($product_id as $item) {
+            if (key($product_id) == $_POST['id-' . key($product_id)]) {
+                $product[$x][key($product_id)]['qty'] = $_POST['quantity-' . key($product_id)];
+                $x++;
+            }
+        }
+    }
+
+    $updatedProduct = json_encode($product);
+    $userCart->updateUserCart($_SESSION['username'], $updatedProduct);
+
+    Header('Location: checkout.php');
+}
+
+if (isset($_POST['delete'])) {
+    $x = key($_POST['delete']);
+    unset($product[$x]);
+    $product = array_values($product);
+    $updatedProduct = json_encode($product);
+    $userCart->updateUserCart($_SESSION['username'], $updatedProduct);
+}
 
 ?>
 
@@ -45,47 +52,66 @@ $total_price = 0;
             <div class="card">
                 <div class="card-body">
 
-
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-
-                                <th scope="col" colspan="2">ITEM</th>
-                                <th class="text-center" scope="col">PRICE</th>
-                                <th class="text-center" scope="col">QUANTITY</th>
-                                <th class="text-center" scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <?php foreach ($cart_items as $item) { ?>
-
+                    <form action="" method="post">
+                        <table class="table">
+                            <thead>
                                 <tr>
 
-                                    <td class="align-middle" style="width: 1px;"> <img class="cart-img" src="<?= $item['image'] ?>" alt=""></td>
-                                    <td class="align-middle text-left">
-                                        <?= $item['name'] ?>
-                                    </td>
-                                    <td class="align-middle text-center"><?= $item['price'] ?>.00</td>
-                                    <td class="align-middle text-center">
-                                        <input type="number" name="quantity" id="" value="<?= $item['quantity'] ?>" style="width:36px;">
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <button class="btn btn-danger btn-sm cart"><i class="bi bi-trash"></i></button>
-                                    </td>
+                                    <th scope="col" colspan="2">ITEM</th>
+                                    <th class="text-center" scope="col">PRICE</th>
+                                    <th class="text-center" scope="col">QUANTITY</th>
+                                    <th class="text-center" scope="col"></th>
                                 </tr>
-                                
-                            <?php } ?>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                                <?php
+                                $x = 0;
+                                foreach ($product as $product_id) {
 
-                    <div class="row d-flex">
-                        <div class="col text-end">
-                            <a href="checkout.php" class="btn btn-dark fw-bold ">CHECKOUT</a>
+                                    foreach ($product_id as $item) {
+                                ?>
+
+                                        <tr>
+
+                                            <td class="align-middle" style="width: 1px;"> <img class="cart-img" src="<?= $item['image'] ?>" alt=""></td>
+                                            <td class="align-middle text-left">
+                                                <?= $item['name'] ?>
+                                            </td>
+                                            <td class="align-middle text-center"><?= $item['price'] ?>.00</td>
+                                            <td class="align-middle text-center">
+                                                <input type="number" name="quantity-<?= key($product_id) ?>" id="" value="<?= $item['qty'] ?>" style="width:36px;" min="1">
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <button type="submit" name="delete[<?= $x++ ?>]" class="btn btn-danger btn-sm cart" onclick="return confirm('Are you sure?');">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                            <input type="hidden" name="id-<?= key($product_id)  ?>" value="<?= key($product_id)  ?>">
+                                        </tr>
+
+                                <?php
+                                    }
+                                } ?>
+
+                            </tbody>
+                        </table>
+
+                        <div class="row d-flex">
+                            <div class="col text-end">
+
+                                <?php
+
+                                if ($userCart->isEmpty($_SESSION['username']))
+                                    echo 'Your cart is empty.';
+                                else
+                                    echo '<button type="submit" name="checkout" class="btn btn-dark fw-bold">CHECKOUT</button>';
+                                ?>
+
+
+                            </div>
                         </div>
-                    </div>
+                    </form>
 
                 </div>
             </div>

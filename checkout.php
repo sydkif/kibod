@@ -1,30 +1,22 @@
 <?php
 include('templates/header.php');
+require_once('model/cart.php');
+require_once('model/user.php');
 
+if (!isset($_SESSION['username']))
+    Header('Location: login.php');
 
-$cart_items = array(
-    array(
-        "image" => "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/keychron-k10--full-size-wired-wireless-mechanical-keyboard-white-rgb-backlight-gateron-blue-switches-mac-windows-layout_1800x1800.jpg?v=1631097816",
-        "name" => "K10 RGB Backlit Blue Switch",
-        "price" => "84",
-        "quantity" => "2"
-    ), array(
-        "image" => "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-K2-wireless-mechanical-keyboard-for-Mac-Windows-iOS-Gateron-switch-red-with-type-C-RGB-white-backlight_9cb9d3e6-a5ac-4ac5-becb-079c7103ed2f_1800x1800.jpg?v=1621223999",
-        "name" => "K2 RGB Backlit Red Switch",
-        "price" => "69",
-        "quantity" => "3"
-    ), array(
-        "image" => "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-K12-60percent-compact-wireless-mechanical-keyboard-Non-backlit-version-for-Mac-Windows-Keychron-mechanical-switch-brown_1800x1800.jpg?v=1618315916",
-        "name" => "K12 Non Backlit Brown Switch",
-        "price" => "59",
-        "quantity" => "1"
-    )
-);
+$userCart = new Cart();
+$checkout = $userCart->getUserCart($_SESSION['username']);
+
+$product = json_decode($checkout, true);
 
 $x = 1;
 $total_qty = 0;
 $total_price = 0;
 
+if ($userCart->isEmpty($_SESSION['username']))
+    header('Location: cart.php');
 
 ?>
 
@@ -64,24 +56,27 @@ $total_price = 0;
                         </thead>
                         <tbody>
 
-                            <?php foreach ($cart_items as $item) { ?>
+                            <?php foreach ($product as $product_id) {
 
-                                <tr>
-                                    <td class="align-middle" style="width: 1px;"> <img class="cart-img" src="<?= $item['image'] ?>" alt=""></td>
-                                    <td class="align-middle text-left">
-                                        <?= $item['name'] ?>
-                                    </td>
-                                    <td class="align-middle text-center"><?= $item['price'] ?>.00</td>
-                                    <td class="align-middle text-center">
-                                        <?= $item['quantity'] ?>
-                                    </td>
+                                foreach ($product_id as $item) { ?>
 
-                                </tr>
+                                    <tr>
+                                        <td class="align-middle" style="width: 1px;"> <img class="cart-img" src="<?= $item['image'] ?>" alt=""></td>
+                                        <td class="align-middle text-left">
+                                            <?= $item['name'] ?>
+                                        </td>
+                                        <td class="align-middle text-center"><?= $item['price'] ?>.00</td>
+                                        <td class="align-middle text-center">
+                                            <?= $item['qty'] ?>
+                                        </td>
+
+                                    </tr>
 
                             <?php
 
-                                $total_qty += $item['quantity'];
-                                $total_price += ($item['price'] * $item['quantity']);
+                                    $total_qty += $item['qty'];
+                                    $total_price += ($item['price'] * $item['qty']);
+                                }
                             }
                             ?>
 

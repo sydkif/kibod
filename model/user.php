@@ -2,35 +2,38 @@
 
 require_once('config.php');
 
-class User {
+class User
+{
 
-    function login($username, $password) {
+    function login($username, $password)
+    {
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
-        if($conn->connect_error) {
+        if ($conn->connect_error) {
             die('Connection failed: ' . $conn->connect_error);
         }
 
         $sql = "SELECT * FROM user WHERE username = '" . $username . "' AND password = '" . $password . "'";
         $result = $conn->query($sql);
-        $count = mysqli_num_rows($result);                        
+        $count = mysqli_num_rows($result);
 
-        if($count == 1) {
+        if ($count == 1) {
             $_SESSION['username'] = $username;
-            if($username == 'admin') {                
+            if ($username == 'admin') {
                 header("Location: admin/dashboard.php");
-            } else {                
+            } else {
                 header("Location: index.php");
             }
-        } else {            
+        } else {
             header("Location: login.php");
         }
     }
 
-    function register($username, $password, $email, $fname, $lname, $phone, $address){
+    function register($username, $password, $email, $fname, $lname, $phone, $address)
+    {
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
-        if($conn->connect_error) {
+        if ($conn->connect_error) {
             die('Connection failed: ' . $conn->connect_error);
         }
 
@@ -39,7 +42,7 @@ class User {
         $check_result = $conn->query($check_sql);
         $count = mysqli_num_rows($check_result);
 
-        if($count == 1) {
+        if ($count == 1) {
             echo '<script language="javascript">';
             echo 'alert("This account already exist")';
             echo '</script>';
@@ -48,10 +51,9 @@ class User {
             $sql = "INSERT INTO user(username, password, email, fname, lname, phone, address) VALUES('$username', '$password', '$email','$fname', '$lname', '$phone', '$address')";
             $result = $conn->query($sql);
 
-            if($result) {
+            if ($result) {
                 $_SESSION['username'] = $username;
                 header("Location: index.php");
-                
             } else {
                 echo '<script language="javascript">';
                 echo 'alert("Fail to enter into database")';
@@ -62,7 +64,8 @@ class User {
         $conn->close();
     }
 
-    function countUser() {
+    function countUser()
+    {
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
         if ($conn->connect_error) {
@@ -77,7 +80,8 @@ class User {
         return $row;
     }
 
-    function getUserById($username){
+    function getUserById($username)
+    {
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
         if ($conn->connect_error) {
@@ -91,7 +95,8 @@ class User {
         return $result;
     }
 
-    function setUser($username, $password, $email, $fname, $lname, $phone, $address){
+    function setUser($username, $password, $email, $fname, $lname, $phone, $address)
+    {
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
         if ($conn->connect_error) {
@@ -100,8 +105,8 @@ class User {
 
         $sql = "UPDATE user SET password='$password', email='$email', fname='$fname', lname='$lname', phone='$phone', address='$address' WHERE username='$username'";
         $result = $conn->query($sql);
- 
-        if($result) {
+        $conn->close();
+        if ($result) {
             header("Location: profile.php");
         }
     }

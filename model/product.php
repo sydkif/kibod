@@ -1,6 +1,5 @@
 <?php
 
-// penoh ade error
 require_once('config.php');
 
 class product

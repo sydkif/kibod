@@ -19,7 +19,7 @@ if(isset($_POST['register'])) {
 } 
 ?>
 
-<div class="container" style="margin-top: 150px;">
+<div class="container" style="margin-top: 80px;">
 
     <div class="row d-flex justify-content-center align-items-center py-5">
 
