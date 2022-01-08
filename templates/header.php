@@ -1,13 +1,14 @@
 <?php
 
 session_start();
-//initialize cart if not set or is unset
-// if (!isset($_SESSION['cart'])) {
-//     $_SESSION['cart'] = array();
-// }
 
-// //unset quantity
-// unset($_SESSION['qty_array']);
+require_once('model/cart.php');
+
+$userCart = new Cart();
+$totalQty = '';
+
+if (isset($_SESSION['username']))
+    $totalQty = $userCart->getTotalQty($_SESSION['username']);
 
 ?>
 
@@ -70,14 +71,19 @@ session_start();
                     </li>
                     <hr>
                 </ul>
+                <?php
+                if (isset($_SESSION['username'])) {  ?>
 
-                <a class="nav-link text-decoration-none text-dark <?php if (basename($_SERVER['PHP_SELF']) == 'cart.php') echo "active" ?>" href="cart.php">CART</a>
-                <?php 
-                    if(isset($_SESSION['username'])) {
-                        echo '<a class="nav-link text-decoration-none text-dark" href="profile.php">PROFILE</a>';
-                    } else {
-                        echo '<a class="nav-link text-decoration-none text-dark" href="login.php">LOGIN</a>';
-                    }
+                    <a class="nav-link text-decoration-none text-dark <?php if (basename($_SERVER['PHP_SELF']) == 'cart.php') echo "active" ?>" href="cart.php">
+                        CART <span id="totalQty" class="translate-middle-y badge rounded-pill bg-dark"><?= $totalQty ?></span></a>
+
+                    <a class="nav-link text-decoration-none text-dark" href="profile.php">PROFILE</a>
+
+                <?php
+                
+                } else {
+                    echo '<a class="nav-link text-decoration-none text-dark" href="login.php">LOGIN</a>';
+                }
                 ?>
                 <br>
             </div>

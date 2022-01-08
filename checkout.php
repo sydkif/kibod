@@ -9,6 +9,11 @@ if (!isset($_SESSION['username']))
 $userCart = new Cart();
 $checkout = $userCart->getUserCart($_SESSION['username']);
 
+$user = new User();
+$deliveryInfo = $user->getDeliveryInfo($_SESSION['username']);
+
+
+
 $product = json_decode($checkout, true);
 
 $x = 1;
@@ -32,10 +37,12 @@ if ($userCart->isEmpty($_SESSION['username']))
 
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <span class="fs-6 fw-bold">DELIVERY ADDRESS</span>
+                    <span class="fs-6 fw-bold">DELIVERY ADDRESS
+                        <a href="profile.php" class="fs-6 fw-bold mx-2 text-decoration-none text-muted">EDIT</a>
+                    </span>
                 </div>
                 <div class="card-body">
-                    <p><b>Lorem ipsum (01X-XXXXXXX)</b> Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <p><?= $deliveryInfo ?></p>
                 </div>
             </div>
 

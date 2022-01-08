@@ -1,15 +1,14 @@
-<?php include('templates/header.php'); ?>
-<?php 
+<?php include('templates/header.php');
 
 require_once('model/user.php');
 
-if(isset($_POST['login'])) {    
-    $userid = $_POST['username'];
+if (isset($_POST['login'])) {
+    $userId = $_POST['username'];
     $password = $_POST['password'];
     $user = new User();
-    $user->login($userid, $password);
-    
-} 
+    $user->login($userId, $password);
+}
+
 ?>
 
 <div class="container" style="margin-top: 80px;">

@@ -1,41 +1,13 @@
 <?php
 
 include('templates/header.php');
-include('model/cart.php');
 
 if (!isset($_SESSION['username']))
     Header('Location: login.php');
 
 $userCart = new Cart();
 $productJson = $userCart->getUserCart($_SESSION['username']);
-
 $product = json_decode($productJson, true);
-
-if (isset($_POST['checkout'])) {
-
-    $x = 0;
-    foreach ($product as $product_id) {
-        foreach ($product_id as $item) {
-            if (key($product_id) == $_POST['id-' . key($product_id)]) {
-                $product[$x][key($product_id)]['qty'] = $_POST['quantity-' . key($product_id)];
-                $x++;
-            }
-        }
-    }
-
-    $updatedProduct = json_encode($product);
-    $userCart->updateUserCart($_SESSION['username'], $updatedProduct);
-
-    Header('Location: checkout.php');
-}
-
-if (isset($_POST['delete'])) {
-    $x = key($_POST['delete']);
-    unset($product[$x]);
-    $product = array_values($product);
-    $updatedProduct = json_encode($product);
-    $userCart->updateUserCart($_SESSION['username'], $updatedProduct);
-}
 
 ?>
 
@@ -52,11 +24,10 @@ if (isset($_POST['delete'])) {
             <div class="card">
                 <div class="card-body">
 
-                    <form action="" method="post">
+                    <form action="controller/CartController.php" method="post">
                         <table class="table">
                             <thead>
                                 <tr>
-
                                     <th scope="col" colspan="2">ITEM</th>
                                     <th class="text-center" scope="col">PRICE</th>
                                     <th class="text-center" scope="col">QUANTITY</th>
@@ -74,13 +45,14 @@ if (isset($_POST['delete'])) {
 
                                         <tr>
 
-                                            <td class="align-middle" style="width: 1px;"> <img class="cart-img" src="<?= $item['image'] ?>" alt=""></td>
+                                            <td class="align-middle" style="width: 1px;"><img class="cart-img" src="<?= $item['image'] ?>" alt=""></td>
                                             <td class="align-middle text-left">
-                                                <?= $item['name'] ?>
+                                                <a href="product-detail.php?id=<?= key($product_id) ?>" class="text-decoration-none text-muted">
+                                                    <?= $item['name'] ?></a>
                                             </td>
                                             <td class="align-middle text-center"><?= $item['price'] ?>.00</td>
                                             <td class="align-middle text-center">
-                                                <input type="number" name="quantity-<?= key($product_id) ?>" id="" value="<?= $item['qty'] ?>" style="width:36px;" min="1">
+                                                <input type="number" name="quantity-<?= key($product_id) ?>" id="" value="<?= $item['qty'] ?>" style="width:48px;" min="1">
                                             </td>
                                             <td class="align-middle text-center">
                                                 <button type="submit" name="delete[<?= $x++ ?>]" class="btn btn-danger btn-sm cart" onclick="return confirm('Are you sure?');">

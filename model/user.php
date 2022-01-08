@@ -53,6 +53,8 @@ class User
 
             if ($result) {
                 $_SESSION['username'] = $username;
+                $userCart = new Cart();
+                $userCart->createCart($username);
                 header("Location: index.php");
             } else {
                 echo '<script language="javascript">';
@@ -109,5 +111,13 @@ class User
         if ($result) {
             header("Location: profile.php");
         }
+    }
+
+    function getDeliveryInfo($username)
+    {
+        $user = $this->getUserById($username);
+        $result = "<b>" . $user['fname'] . " " . $user['lname'] . " (" . $user['phone'] . ")</b> " . $user['address'];
+
+        return $result;
     }
 }

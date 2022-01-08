@@ -4,6 +4,19 @@ require_once('config.php');
 
 class Cart
 {
+    public function createCart($username)
+    {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "INSERT INTO cart (username, product) VALUES ('$username','[]')";
+        $conn->query($sql);
+        $conn->close();
+    }
+
     public function addToCart($username, $item)
     {
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
@@ -20,7 +33,7 @@ class Cart
             $itemDecoded = json_decode($item);
 
             array_push($currentDecoded, $itemDecoded);
-            // print_r(json_encode($currentDecoded));
+
             $sql = "UPDATE cart  SET product = '" . json_encode($currentDecoded) . "' WHERE username = '$username'";
         }
 
@@ -83,6 +96,22 @@ class Cart
         foreach ($cartDecoded as $item) {
             if (key($cartDecoded[$x++]) == $id)
                 $result = true;
+        }
+
+        return $result;
+    }
+
+    public function getTotalQty($username)
+    {
+        $cart = $this->getUserCart($username);
+        $cartDecoded = json_decode($cart, true);
+        $result = 0;
+
+        foreach ($cartDecoded as $product_id) {
+
+            foreach ($product_id as $item) {
+                $result += $item['qty'];
+            }
         }
 
         return $result;
