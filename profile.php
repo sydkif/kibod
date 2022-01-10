@@ -1,27 +1,15 @@
-<?php include('templates/header.php'); ?>
 <?php
 
+include('templates/header.php');
 require_once('model/user.php');
+
+if (!isset($_SESSION['username']))
+    Header('Location: index.php');
 
 // Get user profile by id
 $user = new User();
 $row = $user->getUserById($_SESSION['username']);
 
-// Update user 
-if(isset($_POST['update'])) {    
-    $username = $_SESSION['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
-
-
-    $user = new User();
-    $user->setUser($username, $password, $email, $fname, $lname, $phone, $address);
-
-} 
 
 ?>
 
@@ -53,35 +41,33 @@ if(isset($_POST['update'])) {
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label for="email" class="small-label"><b>EMAIL</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="email" name="email" placeholder="Email address" value="<?= $row['email']; ?>">
+                                    <input class="bg-light mb-3 py-2 form-control" type="email" name="email" placeholder="Email address" value="<?= $row['email']; ?>" disabled>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label for="password" class="small-label"><b>PASSWORD</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="password" name="password" placeholder="Password" value="<?= $row['password']; ?>">
+                                    <input class="bg-light mb-3 py-2 form-control" type="password" name="password" placeholder="Password" value="<?= $row['password']; ?>" pattern=".{8,}" title="Minimum 8 or more characters" required>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label for="confirm_password" class="small-label"><b>CONFIRM PASSWORD</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="password" name="confirm_password" value="<?= $row['password']; ?>">
+                                    <input class="bg-light mb-3 py-2 form-control" type="password" name="confirm_password" value="<?= $row['password']; ?>" pattern=".{8,}" title="Minimum 8 or more characters" required>
                                 </div>
                                 <hr>
                                 <div class="col-12 col-md-6">
                                     <label for="fname" class="small-label"><b>FIRST NAME</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="fname" placeholder="First name" value="<?= $row['fname']; ?>">
+                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="fname" placeholder="First name" value="<?= $row['fname']; ?>" required>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label for="lname" class="small-label"><b>LAST NAME</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="lname" placeholder="Last name" value="<?= $row['lname']; ?>">
+                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="lname" placeholder="Last name" value="<?= $row['lname']; ?>" required>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label for="phone" class="small-label"><b>PHONE NUMBER</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="phone" placeholder="Phone number" value="<?= $row['phone']; ?>">
+                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="phone" placeholder="Phone number" value="<?= $row['phone']; ?>" pattern="^(\+?6?01)[0-46-9]-*[0-9]{7,8}$" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="address" class="small-label"><b>ADDRESS</b></label>
-                                    <!-- <input class="bg-light mb-3 py-2 form-control" type="text" name="address" placeholder="Address" required> -->
-                                    <textarea class="bg-light mb-3 py-2 form-control" name="address" id="" rows="3"> <?= $row['address']; ?></textarea>
+                                    <textarea class="bg-light mb-3 py-2 form-control" name="address" id="" rows="3" required> <?= $row['address']; ?></textarea>
                                 </div>
-
                             </div>
 
                             <button type='submit' class="btn btn-secondary py-2 w-100 shadow mb-2" style="border-radius: 0.5rem;" name="update">
@@ -89,8 +75,13 @@ if(isset($_POST['update'])) {
 
                         </div>
                     </form>
+                    <a href="history.php">
+                        <button class="btn btn-primary py-2 w-100 shadow mb-4" style="border-radius: 0.5rem;">
+                            Purchase History</button>
+                    </a>
+
                     <a href="logout.php">
-                        <button type='submit' class="btn btn-secondary btn-danger py-2 w-100 shadow mb-5" style="border-radius: 0.5rem;">
+                        <button type='submit' class="btn btn-danger py-2 w-100 shadow mb-5" style="border-radius: 0.5rem;">
                             Logout</button>
                     </a>
                 </div>

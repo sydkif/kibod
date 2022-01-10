@@ -34,11 +34,10 @@ if (isset($_POST['addToCart'])) {
             $_SESSION['alert'] = "success";
             $_SESSION['msg'] = "<b>" . $_POST['name'] . "</b> added to cart.";
         }
+        header("Location: ../" . $_POST['url']);
     } else {
         Header('Location: ../login.php');
     }
-
-    header("Location: ../" . $_POST['url']);
 }
 
 if (isset($_POST['buyNow'])) {

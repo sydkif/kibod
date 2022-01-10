@@ -116,4 +116,21 @@ class Cart
 
         return $result;
     }
+
+    public function completePayment($username, $id)
+    {
+        $cart = $this->getUserCart($username);
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "INSERT INTO order_history (order_id, username, products) VALUES ('$id','$username','$cart')";
+        $conn->query($sql);
+        $conn->close();
+
+        $this->updateUserCart($username, '[]');
+    }
 }

@@ -20,12 +20,12 @@ class User
         if ($count == 1) {
             $_SESSION['username'] = $username;
             if ($username == 'admin') {
-                header("Location: admin/dashboard.php");
+                header("Location: ../admin/dashboard.php");
             } else {
-                header("Location: index.php");
+                header("Location: ../index.php");
             }
         } else {
-            header("Location: login.php");
+            header("Location: ../login.php");
         }
     }
 
@@ -55,12 +55,12 @@ class User
                 $_SESSION['username'] = $username;
                 $userCart = new Cart();
                 $userCart->createCart($username);
-                header("Location: index.php");
+                header("Location: ../index.php");
             } else {
                 echo '<script language="javascript">';
                 echo 'alert("Fail to enter into database")';
                 echo '</script>';
-                header("Location: register.php");
+                header("Location: ../register.php");
             }
         }
         $conn->close();
@@ -119,5 +119,31 @@ class User
         $result = "<b>" . $user['fname'] . " " . $user['lname'] . " (" . $user['phone'] . ")</b> " . $user['address'];
 
         return $result;
+    }
+
+    function getPurchaseHistory($username)
+    {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM order_history WHERE username = '$username'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+
+            $order_list = array();
+            foreach ($result as $order) {
+                $order_list[] = $order;
+            }
+            $conn->close();
+            return $order_list;
+        } else {
+
+            $conn->close();
+            return "0 results";
+        }
     }
 }

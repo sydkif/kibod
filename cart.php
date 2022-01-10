@@ -52,7 +52,7 @@ $product = json_decode($productJson, true);
                                             </td>
                                             <td class="align-middle text-center"><?= $item['price'] ?>.00</td>
                                             <td class="align-middle text-center">
-                                                <input type="number" name="quantity-<?= key($product_id) ?>" id="" value="<?= $item['qty'] ?>" style="width:48px;" min="1">
+                                                <input type="number" name="quantity-<?= key($product_id) ?>" id="" value="<?= $item['qty'] ?>" style="width:48px;" min="1" max="3">
                                             </td>
                                             <td class="align-middle text-center">
                                                 <button type="submit" name="delete[<?= $x++ ?>]" class="btn btn-danger btn-sm cart" onclick="return confirm('Are you sure?');">

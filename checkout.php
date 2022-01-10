@@ -138,13 +138,18 @@ if ($userCart->isEmpty($_SESSION['username']))
                                     </tr>
                                     <tr>
                                         <td class="align-middle">Total Payment : </td>
-                                        <td class="align-middle" style="width: 150px;"><span class="fw-bold fs-5"> RM <?= $total_price + 10 ?>.00</td>
+                                        <td class="align-middle" style="width: 150px;"><span class="fw-bold fs-5"> RM <?= $total_price += 10 ?>.00</td>
                                     </tr>
                                 </tbody>
                             </table>
 
                             <hr>
-                            <a href="checkout.php" class="btn btn-dark fw-bold">PLACE ORDER</a>
+                            <form action="order.php" method="post">
+                                <input type="hidden" name="delivery_address" value="<?= $deliveryInfo ?>">
+                                <input type="hidden" name="total_payment" value="<?= $total_price ?>">
+                                <button type="submit" name="pay" class="btn btn-dark fw-bold">PLACE ORDER</button>
+                            </form>
+
                         </div>
                     </div>
 

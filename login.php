@@ -1,13 +1,7 @@
 <?php include('templates/header.php');
 
-require_once('model/user.php');
-
-if (isset($_POST['login'])) {
-    $userId = $_POST['username'];
-    $password = $_POST['password'];
-    $user = new User();
-    $user->login($userId, $password);
-}
+if (isset($_SESSION['username']))
+    Header('Location: index.php');
 
 ?>
 
@@ -21,7 +15,7 @@ if (isset($_POST['login'])) {
 
                 <div class="card-body px-4">
 
-                    <form method="post" name="login">
+                    <form action="controller/UserController.php" method="post" name="login">
 
                         <div class="mb-md-3 mt-md-3">
 
@@ -41,7 +35,7 @@ if (isset($_POST['login'])) {
                                 Log In</button>
 
                             <div class="text-center">
-                                <p class="gray-text">Don't have account? <a href="register.php" class="text-decoration-none text-muted"><b>Sign up</b></a></p>
+                                <p class="gray-text">Don't have account?<a href="register.php" class="text-decoration-none text-muted mx-1"><b>Sign up</b></a></p>
                             </div>
 
                         </div>
@@ -55,6 +49,7 @@ if (isset($_POST['login'])) {
         </div>
 
     </div>
+    
 </div>
 
 <?php include('templates/footer.php'); ?>
