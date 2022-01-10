@@ -43,15 +43,9 @@ $total_price = 0;
                                 $product = json_decode($purchase['products'], true);
                             ?>
                                 <tr>
-                                    <td class="fw-bold"><br><?= $purchase['order_id'] ?><br><br><?= $purchase['date_created'] ?></td>
+                                    <td class="fw-bold"><?= $purchase['order_id'] ?></td>
                                     <td>
                                         <table class="table table-borderless">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" colspan="5"></th>
-
-                                                </tr>
-                                            </thead>
                                             <tbody>
 
                                                 <?php foreach ($product as $product_id) {
@@ -80,24 +74,18 @@ $total_price = 0;
 
                                                 <tr>
                                                     <td class="text-end border-dark fw-bold" colspan="2">TOTAL (RM): </td>
-                                                    <td class="text-end border-dark fw-bold" ><?= $total_price ?>.00</td>
+                                                    <td class="text-end border-dark fw-bold"><?= $total_price ?>.00</td>
                                                     <td class="text-end border-dark fw-bold"><?= $total_qty ?></td>
                                                 </tr>
-
+                                                <tr>
+                                                    <td class="text-end" colspan="5"><b>DATE PURCHASED: </b><?= $purchase['date_created'] ?></td>
+                                                </tr>
                                             </tbody>
                                         </table>
-
                                     </td>
                                 </tr>
 
-
-                            <?php
-                            }
-
-                            ?>
-
-
-
+                            <?php } ?>
                         </tbody>
                     </table>
 
