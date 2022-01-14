@@ -60,6 +60,16 @@ $countUser = $user->countUser();
                     <li class="my-2">
                         <hr class="dropdown-divider">
                     </li>
+                    <li><a href="history.php" class="nav-link px-3">
+                            <span class="me-3">
+                                <i class="bi bi-cart"></i>
+                            </span>
+                            <span>Purchase History</span>
+                        </a>
+                    </li>
+                    <li class="my-2">
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a href="../logout.php" class="nav-link px-3">
                             <span class="me-3">
                                 <i class="bi bi-box-arrow-left"></i>
@@ -147,7 +157,7 @@ $countUser = $user->countUser();
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-9">
+                <!-- <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
                             Pretend important chart exists here
@@ -156,7 +166,7 @@ $countUser = $user->countUser();
                             <canvas id="salesChart" class="chart" width="400" height="200"></canvas>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">

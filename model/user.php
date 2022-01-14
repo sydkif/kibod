@@ -146,4 +146,30 @@ class User
             return "0 results";
         }
     }
+
+    function getAllPurchase()
+    {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM order_history";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+
+            $order_list = array();
+            foreach ($result as $order) {
+                $order_list[] = $order;
+            }
+            $conn->close();
+            return $order_list;
+        } else {
+
+            $conn->close();
+            return "0 results";
+        }
+    }
 }

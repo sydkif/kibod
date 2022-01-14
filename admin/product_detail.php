@@ -10,19 +10,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/admin.css">
 </head>
-<?php 
+<?php
 
 require_once('../model/product.php');
 
-if(isset($_POST['add'])) {    
+if (isset($_POST['add'])) {
     $name = $_POST['name'];
     $type = $_POST['type'];
     $price = $_POST['price'];
 
     $product = new product();
     $product->addProduct($name, $type, $price);
-} 
+}
 ?>
+
 <body>
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -39,39 +40,49 @@ if(isset($_POST['add'])) {
     <div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
         <div class="offcanvas-body p-0">
-                <nav class="navbar-dark">
-                    <ul class="navbar-nav my-3">
-                        <li><a href="dashboard.php" class="nav-link px-3">
-                                <span class="me-3">
-                                    <i class="bi bi-house"></i>
-                                </span>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="my-2">
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a href="products.php" class="nav-link px-3 active">
-                                <span class="me-3">
-                                    <i class="bi bi-cart"></i>
-                                </span>
-                                <span>Manage Product</span>
-                            </a>
-                        </li>
-                        <li class="my-2">
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a href="../logout.php" class="nav-link px-3">
-                                <span class="me-3">
-                                    <i class="bi bi-box-arrow-left"></i>
-                                </span>
-                                <span>Logout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <nav class="navbar-dark">
+                <ul class="navbar-nav my-3">
+                    <li><a href="dashboard.php" class="nav-link px-3">
+                            <span class="me-3">
+                                <i class="bi bi-house"></i>
+                            </span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="my-2">
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a href="products.php" class="nav-link px-3 active">
+                            <span class="me-3">
+                                <i class="bi bi-cart"></i>
+                            </span>
+                            <span>Manage Product</span>
+                        </a>
+                    </li>
+                    <li class="my-2">
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a href="history.php" class="nav-link px-3">
+                            <span class="me-3">
+                                <i class="bi bi-cart"></i>
+                            </span>
+                            <span>Purchase History</span>
+                        </a>
+                    </li>
+                    <li class="my-2">
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a href="../logout.php" class="nav-link px-3">
+                            <span class="me-3">
+                                <i class="bi bi-box-arrow-left"></i>
+                            </span>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
+    </div>
     </div>
     <!-- Offcanvas End -->
 
@@ -95,7 +106,7 @@ if(isset($_POST['add'])) {
                         <option value="tkl">TKL</option>
                         <option value=75>75</option>
                         <option value=65>65</option>
-                        <option value=60>60</option>                        
+                        <option value=60>60</option>
                     </select>
                 </div>
 

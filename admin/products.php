@@ -49,6 +49,16 @@
                     <li class="my-2">
                         <hr class="dropdown-divider">
                     </li>
+                    <li><a href="history.php" class="nav-link px-3">
+                            <span class="me-3">
+                                <i class="bi bi-cart"></i>
+                            </span>
+                            <span>Purchase History</span>
+                        </a>
+                    </li>
+                    <li class="my-2">
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a href="../logout.php" class="nav-link px-3">
                             <span class="me-3">
                                 <i class="bi bi-box-arrow-left"></i>
