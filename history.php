@@ -24,74 +24,73 @@ $total_price = 0;
 
             <hr>
 
-            <div class="card shadow-sm">
-                <div class="card-body">
+            <?php
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">ORDER ID</th>
-                                <th class="text-center" scope="col">PRODUCT LIST</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            foreach ($history as $purchase) {
 
-                            <?php
+                $product = json_decode($purchase['products'], true);
+            ?>
 
-                            foreach ($history as $purchase) {
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <b>Order ID: </b><?= $purchase['order_id'] ?>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" colspan="2">Product</th>
+                                        <th scope="col" class="text-end">Price</th>
+                                        <th scope="col" class="text-end">Qty</th>
+                                    </tr>
+                                </thead>
 
-                                $product = json_decode($purchase['products'], true);
-                            ?>
+
+                                <?php foreach ($product as $product_id) {
+
+                                    foreach ($product_id as $item) { ?>
+
+                                        <tr>
+                                            <td style="width:1px"><img src="<?= $item['image'] ?>" alt="" height="80px"></td>
+                                            <td class="align-middle text-left">
+                                                <a href="product-detail.php?id=<?= key($product_id) ?>" class="text-decoration-none text-dark"><?= $item['name'] ?></a>
+                                            </td>
+                                            <td class="align-middle text-end"><?= $item['price'] ?>.00</td>
+                                            <td class="align-middle text-end">
+                                                <?= $item['qty'] ?>
+                                            </td>
+
+                                        </tr>
+
+                                <?php
+
+                                        $total_qty += $item['qty'];
+                                        $total_price += ($item['price'] * $item['qty']);
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+
+                        <table class="table">
+                            <tbody>
                                 <tr>
-                                    <td class="fw-bold"><?= $purchase['order_id'] ?></td>
-                                    <td>
-                                        <table class="table table-borderless">
-                                            <tbody>
-
-                                                <?php foreach ($product as $product_id) {
-
-                                                    foreach ($product_id as $item) { ?>
-
-                                                        <tr>
-
-                                                            <td class="align-middle text-left" colspan="2">
-                                                                <?= $item['name'] ?>
-                                                            </td>
-                                                            <td class="align-middle text-end"><?= $item['price'] ?>.00</td>
-                                                            <td class="align-middle text-end">
-                                                                <?= $item['qty'] ?>
-                                                            </td>
-
-                                                        </tr>
-
-                                                <?php
-
-                                                        $total_qty += $item['qty'];
-                                                        $total_price += ($item['price'] * $item['qty']);
-                                                    }
-                                                }
-                                                ?>
-
-                                                <tr>
-                                                    <td class="text-end border-dark fw-bold" colspan="2">TOTAL (RM): </td>
-                                                    <td class="text-end border-dark fw-bold"><?= $total_price ?>.00</td>
-                                                    <td class="text-end border-dark fw-bold"><?= $total_qty ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-end" colspan="5"><b>DATE PURCHASED: </b><?= $purchase['date_created'] ?></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
+                                    <td class="align-middle fw-bold text-end">Total Paid : </td>
+                                    <td class="align-middle text-end" style="width: 140px;"><span class="fw-bold fs-5"> RM <?= $total_price += 10 ?>.00</td>
                                 </tr>
+                            </tbody>
+                        </table>
 
-                            <?php } ?>
-                        </tbody>
-                    </table>
-
-
+                    </div>
+                    <div class="card-footer">
+                        <b>Date Purchased: </b><?= $purchase['date_created'] ?>
+                    </div>
                 </div>
-            </div>
+            <?php
+                $total_qty = 0;
+                $total_price = 0;
+            } ?>
 
         </div>
     </div>
