@@ -33,17 +33,9 @@ $total_price = 0;
 
                 <div class="card shadow-sm mb-4">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-6"><b>Order ID: </b><?= $purchase['order_id'] ?></div>
-                            <div class="col-6 text-end"><b>Date Purchased: </b><?= $purchase['date_created'] ?></div>
-                        </div>
-
-
+                        <b>Order ID: </b><?= $purchase['order_id'] ?>
                     </div>
                     <div class="card-body">
-
-
-
                         <table class="table">
                             <tbody>
                                 <thead>
@@ -60,9 +52,9 @@ $total_price = 0;
                                     foreach ($product_id as $item) { ?>
 
                                         <tr>
-                                            <td><img src="<?= $item['image'] ?>" alt="" height="60px"></td>
+                                            <td style="width:1px"><img src="<?= $item['image'] ?>" alt="" height="80px"></td>
                                             <td class="align-middle text-left">
-                                                <?= $item['name'] ?>
+                                                <a href="product-detail.php?id=<?= key($product_id) ?>" class="text-decoration-none text-dark"><?= $item['name'] ?></a>
                                             </td>
                                             <td class="align-middle text-end"><?= $item['price'] ?>.00</td>
                                             <td class="align-middle text-end">
@@ -84,15 +76,17 @@ $total_price = 0;
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td class="align-middle fw-bold">Total Payment : </td>
-                                    <td class="align-middle text-end"><span class="fw-bold fs-5"> RM <?= $total_price += 10 ?>.00</td>
+                                    <td class="align-middle fw-bold text-end">Total Paid : </td>
+                                    <td class="align-middle text-end" style="width: 140px;"><span class="fw-bold fs-5"> RM <?= $total_price += 10 ?>.00</td>
                                 </tr>
                             </tbody>
                         </table>
 
                     </div>
+                    <div class="card-footer">
+                        <b>Date Purchased: </b><?= $purchase['date_created'] ?>
+                    </div>
                 </div>
-
             <?php
                 $total_qty = 0;
                 $total_price = 0;
