@@ -62,7 +62,7 @@ class product
         return $row;
     }
 
-    function addProduct($name, $type, $price) {
+    function addProduct($name, $type, $price, $image) {
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
         if ($conn->connect_error) {
@@ -71,7 +71,7 @@ class product
 
         $now = date('Y-m-d H:i:s');
 
-        $sql = "INSERT INTO product(type, name, image, price, date_created, date_update) VALUES ('$type', '$name', NULL, '$price', '$now', '$now')";
+        $sql = "INSERT INTO product(type, name, image, price, date_created, date_update) VALUES ('$type', '$name', '$image', '$price', '$now', '$now')";
         $result = $conn->query($sql);
 
         if($result) {
@@ -98,7 +98,7 @@ class product
         $conn->close();
     }
 
-    function updateProduct($id, $name, $type, $price){
+    function updateProduct($id, $name, $type, $price, $image){
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
         if ($conn->connect_error) {
@@ -106,7 +106,7 @@ class product
         }
 
         $now = date('Y-m-d H:i:s');
-        $sql = "UPDATE product SET name='$name', type='$type', price='$price', date_update='$now' WHERE id='$id'";
+        $sql = "UPDATE product SET name='$name', type='$type', image='$image', price='$price', date_update='$now' WHERE id='$id'";
         $result = $conn->query($sql);
  
         if($result) {
