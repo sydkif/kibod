@@ -10,25 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/admin.css">
 </head>
-<?php
-
-require_once('../model/product.php');
-
-if (isset($_GET['id'])) {
-    $product = new product();
-    $row = $product->getProductById($_GET['id']);
-}
-
-if (isset($_POST['update'])) {
-    $id = $_GET['id'];
-    $name = $_POST['name'];
-    $type = $_POST['type'];
-    $price = $_POST['price'];
-
-    $product = new product();
-    $product->updateProduct($id, $name, $type, $price);
-}
-?>
 
 <body>
     <!-- Top Navbar -->
@@ -37,7 +18,7 @@ if (isset($_POST['update'])) {
             <span class="navbar-toggler-icon" data-bs-target="#offcanvasExample"></span>
         </button>
         <div class="container-fluid">
-            <a class="navbar-brand me-auto " href="#">Personal Shopper</a>
+            <a class="navbar-brand me-auto " href="#">KIBOD</a>
         </div>
     </nav>
     <!-- Top Navbar End -->
@@ -58,7 +39,7 @@ if (isset($_POST['update'])) {
                     <li class="my-2">
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a href="products.php" class="nav-link px-3 active">
+                    <li><a href="products.php" class="nav-link px-3">
                             <span class="me-3">
                                 <i class="bi bi-cart"></i>
                             </span>
@@ -68,7 +49,7 @@ if (isset($_POST['update'])) {
                     <li class="my-2">
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a href="history.php" class="nav-link px-3">
+                    <li><a href="history.php" class="nav-link px-3 active">
                             <span class="me-3">
                                 <i class="bi bi-cart"></i>
                             </span>
@@ -89,51 +70,62 @@ if (isset($_POST['update'])) {
             </nav>
         </div>
     </div>
-    </div>
     <!-- Offcanvas End -->
 
     <main class="mt-5 pt-3">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 fs-1">
-                    Update Product
+                    Purchase History
                 </div>
             </div>
-            <form method="POST" name="add">
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="name">Name</label>
-                    <input type="text" id="text" name="name" class="form-control" value="<?= $row['name'] ?>" />
-                </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table id="product_table" class="table table-stripped table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Num</td>
+                                    <td>Order ID</td>
+                                    <td>Username</td>
+                                    <td>Product</td>
+                                    <td>Total</td>                                    
+                                </tr>
+                            </thead>
+                            <?php
 
-                <div class="form-outline mb-4">
-                    <label>Type: </label>
-                    <select class="form-control" name="type">
-                        <option value="full" <?php if ($row['type'] == 'full') echo 'selected="selected"'; ?>>Full</option>
-                        <option value="tkl" <?php if ($row['type'] == 'tkl') echo 'selected="selected"'; ?>>TKL</option>
-                        <option value=75 <?php if ($row['type'] == 75) echo 'selected="selected"'; ?>>75</option>
-                        <option value=65 <?php if ($row['type'] == 65) echo 'selected="selected"'; ?>>75</option>
-                        <option value=60 <?php if ($row['type'] == 60) echo 'selected="selected"'; ?>>60</option>
-                    </select>
+                            require_once("../model/user.php");
+                            $user = new User();
+                            $history = $user->getAllPurchase();
+                            $num = 0;
+                            foreach ($history as $purchase) {
+                            $product = json_decode($purchase['products'], true);
+                            
+                            foreach ($product as $product_id) {
+                                
+                                foreach ($product_id as $item) {
+                                    ++$num;
+                            ?>
+                                <tbody>
+                                    <tr>
+                                        <td><?= $num; ?></td>
+                                        <td><?= $purchase['order_id']; ?></td>
+                                        <td><?= $purchase['username']; ?></td>
+                                        <td><?= $item['name']; ?></td>
+                                        <td><?= $item['price']; ?></td>                                        
+                                    </tr>
+                                <?php
+                                    }
+                                }
+                            }
+                                ?>
+                                </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <div class="form-outline mb-4">
-                    <span class="input-group-text" id="basic-addon1">RM</span>
-                    <input type="text" name="price" class="form-control" value="<?= $row['price'] ?>" />
-                </div>
-
-                <div class="input-group mb-3">
-                    <input type="file" class="form-control">
-                    <label class="input-group-text">Upload</label>
-                </div>
-
-                <div class="d-flex flex-row-reverse">
-                    <button type="submit" class="btn btn-primary" name="update">Update Product</button>
-                </div>
-            </form>
+            </div>            
         </div>
     </main>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-
 </html>
