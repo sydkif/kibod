@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
 
 <div class="container" style="margin-top: 140px;">
 
-    <a href="product-list.php?type=<?= $selected_product['type'] ?>" class="text-decoration-none fw-bold fs-4 text-dark">
+    <a href="<?= isset($_SESSION['last_page']) ? $_SESSION['last_page'] : '' ?>" class="text-decoration-none fw-bold fs-4 text-dark">
         <i class="bi bi-caret-left-fill"></i>Go back</a>
     <hr>
 

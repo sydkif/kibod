@@ -23,7 +23,7 @@ if (isset($_SESSION['username']))
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="manifest" href="manifest.json"> -->
+    <link rel="manifest" href="manifest.json">
 
     <title>KIBOD&trade;</title>
 </head>
@@ -69,8 +69,18 @@ if (isset($_SESSION['username']))
                         <a class="nav-link 
                         <?php if ($_GET['type'] == 60) echo "active" ?>" href="product-list.php?type=60">60% LAYOUT</a>
                     </li>
+                    <li class="nav-item mx-1">
+                        <form action="product-list.php" class="d-flex" style="height:36px">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                            <button class="btn btn-sm btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </li>
                     <hr>
+
                 </ul>
+
+
+                <hr>
                 <?php
                 if (isset($_SESSION['username'])) {  ?>
 
@@ -80,7 +90,7 @@ if (isset($_SESSION['username']))
                     <a class="nav-link text-decoration-none text-dark" href="profile.php">PROFILE</a>
 
                 <?php
-                
+
                 } else {
                     echo '<a class="nav-link text-decoration-none text-dark" href="login.php">LOGIN</a>';
                 }
