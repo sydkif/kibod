@@ -24,9 +24,10 @@ if (isset($_POST['update'])) {
     $name = $_POST['name'];
     $type = $_POST['type'];
     $price = $_POST['price'];
+    $image = $_POST['image'];
 
     $product = new product();
-    $product->updateProduct($id, $name, $type, $price);
+    $product->updateProduct($id, $name, $type, $price, $image);
 }
 ?>
 
@@ -121,9 +122,9 @@ if (isset($_POST['update'])) {
                     <input type="text" name="price" class="form-control" value="<?= $row['price'] ?>" />
                 </div>
 
-                <div class="input-group mb-3">
-                    <input type="file" class="form-control">
-                    <label class="input-group-text">Upload</label>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="name">Upload Image Link</label>
+                    <input type="text" id="text" name="image" class="form-control" value="<?= $row['image'] ?>" />
                 </div>
 
                 <div class="d-flex flex-row-reverse">

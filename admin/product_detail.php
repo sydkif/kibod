@@ -18,9 +18,10 @@ if (isset($_POST['add'])) {
     $name = $_POST['name'];
     $type = $_POST['type'];
     $price = $_POST['price'];
+    $image = $_POST['image'];
 
     $product = new product();
-    $product->addProduct($name, $type, $price);
+    $product->addProduct($name, $type, $price, $image);
 }
 ?>
 
@@ -115,9 +116,9 @@ if (isset($_POST['add'])) {
                     <input type="text" name="price" class="form-control" />
                 </div>
 
-                <div class="input-group mb-3">
-                    <input type="file" class="form-control">
-                    <label class="input-group-text">Upload</label>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="name">Upload Image Link</label>
+                    <input type="text" id="text" name="image" class="form-control" />
                 </div>
 
                 <div class="d-flex flex-row-reverse">
