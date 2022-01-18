@@ -29,11 +29,10 @@ if (isset($_POST['login'])) {
 if (isset($_POST['update'])) {
     $username = $_SESSION['username'];
     $password = $_POST['password'];
-    $email = $_POST['email'];
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
 
-    $user->setUser($username, $password, $email, $fname, $lname, $phone, $address);
+    $user->setUser($username, $password, $fname, $lname, $phone, $address);
 }

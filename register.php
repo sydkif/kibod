@@ -20,6 +20,14 @@
                                 <p class="gray-text">Enter your account details below</p>
                             </div>
 
+                            <?php if (isset($_SESSION['message'])) { ?>
+                                <div class="alert alert-<?= $_SESSION['alert'] ?> alert-dismissible fade show" role="alert">
+                                    <?= $_SESSION['message'] ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php }
+                            $_SESSION['message'] = null; ?>
+
                             <div class="row mb-4 mt-5">
                                 <hr>
                                 <div class="col-12 col-md-6">

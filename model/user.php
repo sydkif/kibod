@@ -20,13 +20,17 @@ class User
         if ($count == 1) {
             $_SESSION['username'] = $username;
             if ($username == 'admin') {
-                header("Location: ../admin/dashboard.php");
+                $header = 'Location: ../admin/dashboard.php';
             } else {
-                header("Location: ../index.php");
+                $header = 'Location: ../index.php';
             }
         } else {
-            header("Location: ../login.php");
+            $_SESSION['alert'] = 'danger';
+            $_SESSION['message'] = 'Invalid username or password!';
+            $header = 'Location: ../login.php';
         }
+        $conn->close();
+        header($header);
     }
 
     function register($username, $password, $email, $fname, $lname, $phone, $address)
@@ -43,9 +47,9 @@ class User
         $count = mysqli_num_rows($check_result);
 
         if ($count == 1) {
-            echo '<script language="javascript">';
-            echo 'alert("This account already exist")';
-            echo '</script>';
+            $_SESSION['alert'] = 'danger';
+            $_SESSION['message'] = 'Username <b>' . $username . '</b> is being used already.';
+            $header = 'Location: ../register.php';
         } else {
             // Registering for a new account
             $sql = "INSERT INTO user(username, password, email, fname, lname, phone, address) VALUES('$username', '$password', '$email','$fname', '$lname', '$phone', '$address')";
@@ -55,15 +59,19 @@ class User
                 $_SESSION['username'] = $username;
                 $userCart = new Cart();
                 $userCart->createCart($username);
-                header("Location: ../index.php");
+                $_SESSION['alert'] = 'success';
+                $_SESSION['message'] = 'Registration successful, you can <b>log in</b> now.';
+                $header = 'Location: ../index.php';
             } else {
-                echo '<script language="javascript">';
-                echo 'alert("Fail to enter into database")';
-                echo '</script>';
-                header("Location: ../register.php");
+                $_SESSION['alert'] = 'danger';
+                $_SESSION['message'] = 'Something is wrong. Error code: ' . $conn->errno . '<br> Error message: ' . $conn->error;
+                if ($conn->errno == '1062')
+                    $_SESSION['message'] = 'Email <b>' . $email . '</b> is being used already.';
+                $header = 'Location: ../register.php';
             }
         }
         $conn->close();
+        header($header);
     }
 
     function countUser()
@@ -97,7 +105,7 @@ class User
         return $result;
     }
 
-    function setUser($username, $password, $email, $fname, $lname, $phone, $address)
+    function setUser($username, $password, $fname, $lname, $phone, $address)
     {
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
@@ -105,12 +113,19 @@ class User
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "UPDATE user SET password='$password', email='$email', fname='$fname', lname='$lname', phone='$phone', address='$address' WHERE username='$username'";
+        $sql = "UPDATE user SET password='$password', fname='$fname', lname='$lname', phone='$phone', address='$address' WHERE username='$username'";
         $result = $conn->query($sql);
-        $conn->close();
         if ($result) {
-            header("Location: profile.php");
+            $_SESSION['alert'] = 'success';
+            $_SESSION['message'] = 'Update successful.';
+            $header = 'Location: ../profile.php';
+        } else {
+            $_SESSION['alert'] = 'danger';
+            $_SESSION['message'] = 'Something is wrong. Error code: ' . $conn->errno . '<br> Error message: ' . $conn->error;
+            $header = 'Location: ../profile.php';
         }
+        $conn->close();
+        header($header);
     }
 
     function getDeliveryInfo($username)

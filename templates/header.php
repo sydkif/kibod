@@ -29,8 +29,6 @@ if (isset($_SESSION['username']))
 </head>
 
 <body>
-
-
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container-fluid">
             <a href="index.php"><img class="logo" src="img/logo.png" alt="" srcset=""></a>
@@ -69,17 +67,14 @@ if (isset($_SESSION['username']))
                         <a class="nav-link 
                         <?php if ($_GET['type'] == 60) echo "active" ?>" href="product-list.php?type=60">60% LAYOUT</a>
                     </li>
+                    <hr>
                     <li class="nav-item mx-1">
                         <form action="product-list.php" class="d-flex" style="height:36px">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                             <button class="btn btn-sm btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
                         </form>
                     </li>
-                    <hr>
-
                 </ul>
-
-
                 <hr>
                 <?php
                 if (isset($_SESSION['username'])) {  ?>

@@ -29,9 +29,17 @@ if (isset($_SESSION['username']))
                             <input class="bg-light mb-3 py-2 form-control" type="text" name="username" placeholder="Username" required>
 
                             <label for="password" class="small-label"><b>PASSWORD</b></label>
-                            <input class="bg-light mb-5 py-2 form-control" type="password" name="password" placeholder="Password" required>
+                            <input class="bg-light mb-3 py-2 form-control" type="password" name="password" placeholder="Password" required>
 
-                            <button type="submit" class="btn btn-secondary py-2 w-100 shadow mb-5" style="border-radius: 0.5rem;" name="login">
+                            <?php if (isset($_SESSION['message'])) { ?>
+                                <div class="alert alert-<?= $_SESSION['alert'] ?> alert-dismissible fade show" role="alert">
+                                    <?= $_SESSION['message'] ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php }
+                            $_SESSION['message'] = null; ?>
+
+                            <button type="submit" class="btn btn-secondary py-2 w-100 shadow mt-2 mb-5" style="border-radius: 0.5rem;" name="login">
                                 Log In</button>
 
                             <div class="text-center">
@@ -49,7 +57,7 @@ if (isset($_SESSION['username']))
         </div>
 
     </div>
-    
+
 </div>
 
 <?php include('templates/footer.php'); ?>

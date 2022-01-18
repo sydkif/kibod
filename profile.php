@@ -23,7 +23,7 @@ $row = $user->getUserById($_SESSION['username']);
 
                 <div class="card-body px-4">
 
-                    <form method="post" name="update">
+                    <form action="controller/UserController.php" method="post" name="update">
 
                         <div class="mb-md-3 mt-md-3">
 
@@ -32,6 +32,14 @@ $row = $user->getUserById($_SESSION['username']);
                                 <h3 class="fs-4 fw-bold mb-3 mt-3">Profile</h3>
                                 <p class="gray-text">Account Details</p>
                             </div>
+
+                            <?php if (isset($_SESSION['message'])) { ?>
+                                <div class="alert alert-<?= $_SESSION['alert'] ?> alert-dismissible fade show" role="alert">
+                                    <?= $_SESSION['message'] ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php }
+                            $_SESSION['message'] = null; ?>
 
                             <div class="row mb-4 mt-5">
                                 <hr>
