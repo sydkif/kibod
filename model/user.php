@@ -56,12 +56,12 @@ class User
             $result = $conn->query($sql);
 
             if ($result) {
-                $_SESSION['username'] = $username;
+                // $_SESSION['username'] = $username;
                 $userCart = new Cart();
                 $userCart->createCart($username);
                 $_SESSION['alert'] = 'success';
                 $_SESSION['message'] = 'Registration successful, you can <b>log in</b> now.';
-                $header = 'Location: ../index.php';
+                $header = 'Location: ../login.php';
             } else {
                 $_SESSION['alert'] = 'danger';
                 $_SESSION['message'] = 'Something is wrong. Error code: ' . $conn->errno . '<br> Error message: ' . $conn->error;
