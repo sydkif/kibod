@@ -13,11 +13,16 @@ class User
             die('Connection failed: ' . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM user WHERE username = '" . $username . "' AND password = '" . $password . "'";
+        // Verifying hashed password
+        $sql_password = "SELECT * FROM user WHERE username = '" . $username . "'";
+        $result = $conn->query($sql_password)->fetch_row();
+        $verify = password_verify($password, $result[1]);
+
+        $sql = "SELECT * FROM user WHERE username = '" . $username . "'";
         $result = $conn->query($sql);
         $count = mysqli_num_rows($result);
 
-        if ($count == 1) {
+        if ($count == 1 && $verify) {
             $_SESSION['username'] = $username;
             if ($username == 'admin') {
                 $header = 'Location: ../admin/dashboard.php';
@@ -46,13 +51,16 @@ class User
         $check_result = $conn->query($check_sql);
         $count = mysqli_num_rows($check_result);
 
+        // Hashing password
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
         if ($count == 1) {
             $_SESSION['alert'] = 'danger';
             $_SESSION['message'] = 'Username <b>' . $username . '</b> is being used already.';
             $header = 'Location: ../register.php';
         } else {
             // Registering for a new account
-            $sql = "INSERT INTO user(username, password, email, fname, lname, phone, address) VALUES('$username', '$password', '$email','$fname', '$lname', '$phone', '$address')";
+            $sql = "INSERT INTO user(username, password, email, fname, lname, phone, address) VALUES('$username', '$hash', '$email','$fname', '$lname', '$phone', '$address')";
             $result = $conn->query($sql);
 
             if ($result) {
@@ -113,7 +121,10 @@ class User
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "UPDATE user SET password='$password', fname='$fname', lname='$lname', phone='$phone', address='$address' WHERE username='$username'";
+        // Hashing password
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "UPDATE user SET password='$hash', fname='$fname', lname='$lname', phone='$phone', address='$address' WHERE username='$username'";
         $result = $conn->query($sql);
         if ($result) {
             $_SESSION['alert'] = 'success';
