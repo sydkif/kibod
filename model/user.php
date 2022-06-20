@@ -1,5 +1,8 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once('config.php');
 
 class User
@@ -24,6 +27,50 @@ class User
 
         if ($count == 1 && $verify) {
             $_SESSION['username'] = $username;
+
+            $secret = $this->getSecretKey($username);
+
+            if ($secret != NULL || $secret != '') {
+                $_SESSION['password'] = $password;
+                $_SESSION['secret'] = $secret;
+                header('Location: ../verify2fa.php');
+                die();
+            }
+
+            if ($username == 'admin') {
+                $header = 'Location: ../admin/dashboard.php';
+            } else {
+                $header = 'Location: ../index.php';
+            }
+        } else {
+            $_SESSION['alert'] = 'danger';
+            $_SESSION['message'] = 'Invalid username or password!';
+            $header = 'Location: ../login.php';
+        }
+        $conn->close();
+        header($header);
+    }
+
+    function login2fa($username, $password)
+    {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die('Connection failed: ' . $conn->connect_error);
+        }
+
+        // Verifying hashed password
+        $sql_password = "SELECT * FROM user WHERE username = '" . $username . "'";
+        $result = $conn->query($sql_password)->fetch_row();
+        $verify = password_verify($password, $result[1]);
+
+        $sql = "SELECT * FROM user WHERE username = '" . $username . "'";
+        $result = $conn->query($sql);
+        $count = mysqli_num_rows($result);
+
+        if ($count == 1 && $verify) {
+            $_SESSION['username'] = $username;
+
             if ($username == 'admin') {
                 $header = 'Location: ../admin/dashboard.php';
             } else {
@@ -94,6 +141,68 @@ class User
         $conn->close();
         header($header);
     }
+
+    function enable2FA($username, $secret_key)
+    {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "UPDATE user SET secret_key = '$secret_key' WHERE username= '$username'";
+        $result = $conn->query($sql);
+        if ($result) {
+            $_SESSION['alert'] = 'success';
+            $_SESSION['message'] = 'Authentication Successful.';
+            // $header = 'Location: ../profile.php';
+        } else {
+            $_SESSION['alert'] = 'danger';
+            $_SESSION['message'] = 'Something is wrong. Error code: ' . $conn->errno . '<br> Error message: ' . $conn->error;
+            // $header = 'Location: ../profile.php';
+        }
+        $conn->close();
+        header('Location: ../profile.php');
+    }
+
+    function disable2fa($username)
+    {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "UPDATE user SET secret_key = '' WHERE username= '$username'";
+        $result = $conn->query($sql);
+        if ($result) {
+            $_SESSION['alert'] = 'success';
+            $_SESSION['message'] = '2FA has been disabled.';
+            // $header = 'Location: ../profile.php';
+        } else {
+            $_SESSION['alert'] = 'danger';
+            $_SESSION['message'] = 'Something is wrong. Error code: ' . $conn->errno . '<br> Error message: ' . $conn->error;
+            // $header = 'Location: ../profile.php';
+        }
+        $conn->close();
+        header('Location: ../profile.php');
+    }
+
+    function getSecretKey($username)
+    {
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT secret_key FROM user WHERE username = '$username' LIMIT 0,1";
+        $result = $conn->query($sql);
+        $row = $result->fetch_array();
+
+        return $row['secret_key'];
+    }
+
 
     function countUser()
     {
