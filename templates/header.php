@@ -10,6 +10,12 @@ $totalQty = '';
 if (isset($_SESSION['username']))
     $totalQty = $userCart->getTotalQty($_SESSION['username']);
 
+if (isset($_GET['type'])) {
+    $type = $_GET['type'];
+} else {
+    $type = '';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -45,27 +51,27 @@ if (isset($_SESSION['username']))
 
                     <li class="nav-item mx-1">
                         <a class="nav-link 
-                        <?php if ($_GET['type'] == 'full') echo "active" ?>" href="product-list.php?type=full">FULL SIZED</a>
+                        <?php if ($type == 'full') echo "active" ?>" href="product-list.php?type=full">FULL SIZED</a>
                     </li>
 
                     <li class="nav-item mx-1">
                         <a class="nav-link 
-                        <?php if ($_GET['type'] == 'tkl') echo "active" ?>" href="product-list.php?type=tkl">TENKEYLESS</a>
+                        <?php if ($type == 'tkl') echo "active" ?>" href="product-list.php?type=tkl">TENKEYLESS</a>
                     </li>
 
                     <li class="nav-item mx-1">
                         <a class="nav-link 
-                        <?php if ($_GET['type'] == 75) echo "active" ?>" href="product-list.php?type=75">75% LAYOUT</a>
+                        <?php if ($type == 75) echo "active" ?>" href="product-list.php?type=75">75% LAYOUT</a>
                     </li>
 
                     <li class="nav-item mx-1">
                         <a class="nav-link 
-                        <?php if ($_GET['type'] == 65) echo "active" ?>" href="product-list.php?type=65">65% LAYOUT</a>
+                        <?php if ($type == 65) echo "active" ?>" href="product-list.php?type=65">65% LAYOUT</a>
                     </li>
 
                     <li class="nav-item mx-1">
                         <a class="nav-link 
-                        <?php if ($_GET['type'] == 60) echo "active" ?>" href="product-list.php?type=60">60% LAYOUT</a>
+                        <?php if ($type == 60) echo "active" ?>" href="product-list.php?type=60">60% LAYOUT</a>
                     </li>
                     <hr>
                     <li class="nav-item mx-1">

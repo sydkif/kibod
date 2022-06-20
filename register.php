@@ -1,5 +1,7 @@
 <?php include('templates/header.php'); ?>
 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <div class="container" style="margin-top: 80px;">
 
     <div class="row d-flex justify-content-center align-items-center py-5">
@@ -62,6 +64,11 @@
                                 <div class="col-12">
                                     <label for="address" class="small-label"><b>DELIVERY ADDRESS</b></label>
                                     <textarea class="bg-light mb-3 py-2 form-control" name="address" id="" rows="3" placeholder="Delivery address" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label for="captcha" class="small-label"><b>CAPTCHA</b></label>
+                                    <div class="g-recaptcha" data-sitekey="6LffioQgAAAAAA9eP3HkMzEBRcFpI9QnLD_GIehi"></div>
+                                    <!-- <textarea class="bg-light mb-3 py-2 form-control" name="address" id="" rows="3" placeholder="Delivery address" required></textarea> -->
                                 </div>
 
                             </div>

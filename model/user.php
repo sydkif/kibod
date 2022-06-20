@@ -47,35 +47,48 @@ class User
         }
 
         // Checking if account has already exist
-        $check_sql = "SELECT username FROM user WHERE username = '$username'";
-        $check_result = $conn->query($check_sql);
-        $count = mysqli_num_rows($check_result);
+        $check_username = "SELECT username FROM user WHERE username = '$username'";
+        $check_username_result = $conn->query($check_username);
+        $username_result = mysqli_num_rows($check_username_result);
+
+        // Checking if email has already exist
+        $check_email = "SELECT email FROM user WHERE email = '$email'";
+        $check_email_result = $conn->query($check_email);
+        $email_result = mysqli_num_rows($check_email_result);
 
         // Hashing password
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        if ($count == 1) {
+        if ($username_result == 1) {
             $_SESSION['alert'] = 'danger';
             $_SESSION['message'] = 'Username <b>' . $username . '</b> is being used already.';
-            $header = 'Location: ../register.php';
+            // $header = 'Location: ../register.php';
+            echo '<script>history.back()</script>';
+            die();
+        } else if ($email_result == 1) {
+            $_SESSION['alert'] = 'danger';
+            $_SESSION['message'] = 'Email <b>' . $email . '</b> is being used already.';
+            // $header = 'Location: ../register.php';
+            echo '<script>history.back()</script>';
+            die();
         } else {
             // Registering for a new account
             $sql = "INSERT INTO user(username, password, email, fname, lname, phone, address) VALUES('$username', '$hash', '$email','$fname', '$lname', '$phone', '$address')";
             $result = $conn->query($sql);
 
             if ($result) {
-                $_SESSION['username'] = $username;
+                // $_SESSION['username'] = $username;
                 $userCart = new Cart();
                 $userCart->createCart($username);
                 $_SESSION['alert'] = 'success';
                 $_SESSION['message'] = 'Registration successful, you can <b>log in</b> now.';
-                $header = 'Location: ../index.php';
+                $header = 'Location: ../login.php';
             } else {
                 $_SESSION['alert'] = 'danger';
                 $_SESSION['message'] = 'Something is wrong. Error code: ' . $conn->errno . '<br> Error message: ' . $conn->error;
                 if ($conn->errno == '1062')
-                    $_SESSION['message'] = 'Email <b>' . $email . '</b> is being used already.';
-                $header = 'Location: ../register.php';
+
+                    $header = 'Location: ../register.php';
             }
         }
         $conn->close();
