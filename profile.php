@@ -88,6 +88,90 @@ $row = $user->getUserById($_SESSION['username']);
                             Purchase History</button>
                     </a>
 
+                    <?php
+
+                    if ($row['secret_key'] == NULL || $row['secret_key'] == '') {
+
+                    ?>
+
+                        <button class="btn btn-dark py-2 w-100 shadow mb-4" style="border-radius: 0.5rem;" data-bs-toggle="modal" data-bs-target="#enable_2fa">Enable Two-Factor Auth</button>
+                        <form action="check.php" method="post">
+                            <div id="enable_2fa" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fw-bold">Enable Two Factor Auth</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>1. Download Google Authenticator for your phone or tablet</p>
+                                            <p>2. Scan the QR Code</p>
+                                            <?php
+
+                                            $username = $_SESSION['username'];
+
+                                            include_once 'vendor/sonata-project/google-authenticator/src/FixedBitNotation.php';
+                                            include_once 'vendor/sonata-project/google-authenticator/src/GoogleAuthenticatorInterface.php';
+                                            include_once 'vendor/sonata-project/google-authenticator/src/GoogleAuthenticator.php';
+                                            include_once 'vendor/sonata-project/google-authenticator/src/GoogleQrUrl.php';
+
+                                            $g = new \Google\Authenticator\GoogleAuthenticator();
+                                            // $secret = 'XVQ2UIGO75XRUKJO';
+                                            //Optionally, you can use $g->generateSecret() to generate your secret
+                                            $secret = $g->generateSecret();
+
+                                            //the "getUrl" method takes as a parameter: "username", "host" and the key "secret"
+                                            echo '<img src="' . $g->getURL($username, 'kibod.test', $secret) . '" /><br><br>';
+                                            echo 'or insert manually:<br>' . $secret;
+
+                                            ?>
+                                            <hr>
+                                            <p>Enter your 6-Digit Code</p>
+
+                                            <input class="form-control" type="text" name="code">
+                                            <input type="hidden" name="secret_key" value="<?= $secret ?>">
+                                            <input type="hidden" name="username" value="<?= $row['username']; ?>">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" name="activate_2fa" class="btn btn-primary">Activate</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    <?php } else { ?>
+
+                        <button class="btn btn-dark py-2 w-100 shadow mb-4" style="border-radius: 0.5rem;" data-bs-toggle="modal" data-bs-target="#disable_2fa">Disable Two-Factor Auth</button>
+                        <form action="controller/UserController.php" method="post">
+                            <div id="disable_2fa" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fw-bold">Disable Two Factor Auth</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Enter your 6-Digit Code</p>
+
+                                            <input class="form-control" type="text" name="code">
+                                            <input type="hidden" name="secret_key" value="<?= $row['secret_key'] ?>">
+                                            <input type="hidden" name="username" value="<?= $row['username']; ?>">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" name="disable_2fa" class="btn btn-danger">Disable</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    <?php  } ?>
+
                     <a href="logout.php">
                         <button type='submit' class="btn btn-danger py-2 w-100 shadow mb-5" style="border-radius: 0.5rem;">
                             Logout</button>

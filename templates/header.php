@@ -14,7 +14,6 @@ if (isset($_GET['type']))
     $type = $_GET['type'];
 else
     $type = '';
-
 ?>
 
 <!DOCTYPE html>
