@@ -10,12 +10,10 @@ $totalQty = '';
 if (isset($_SESSION['username']))
     $totalQty = $userCart->getTotalQty($_SESSION['username']);
 
-if (isset($_GET['type'])) {
+if (isset($_GET['type']))
     $type = $_GET['type'];
-} else {
+else
     $type = '';
-}
-
 ?>
 
 <!DOCTYPE html>

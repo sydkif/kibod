@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label for="phone" class="small-label"><b>PHONE NUMBER</b></label>
-                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="phone" placeholder="Phone number" pattern="^(\+?6?01)[0-46-9]-*[0-9]{7,8}$" required>
+                                    <input class="bg-light mb-3 py-2 form-control" type="text" name="phone" placeholder="Phone number" pattern="^(\+?6?01)[0-46-9]-*[0-9]{7,8}$" title="eg. 0123456789" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="address" class="small-label"><b>DELIVERY ADDRESS</b></label>
