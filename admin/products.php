@@ -116,7 +116,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="delete.php?id=<?= $row['id'] ?>">
+                                            <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you would like to delete this product?')">
                                                 <button class="btn">
                                                     <i class="bi bi-trash" style="color: red;"></i>
                                                 </button>
@@ -143,5 +143,13 @@
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        function confirmationDelete(anchor) {
+            var conf = confirm('Are you sure want to delete this record?');
+            if (conf)
+                window.location = anchor.attr("href");
+        }
+    </script>
 </body>
+
 </html>

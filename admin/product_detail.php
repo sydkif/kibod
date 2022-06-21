@@ -113,7 +113,7 @@ if (isset($_POST['add'])) {
 
                 <div class="form-outline mb-4">
                     <span class="input-group-text" id="basic-addon1">RM</span>
-                    <input type="text" name="price" class="form-control" />
+                    <input type="number" name="price" class="form-control" min="1" max="400"/>
                 </div>
 
                 <div class="form-outline mb-4">
